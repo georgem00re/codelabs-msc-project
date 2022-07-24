@@ -17,7 +17,7 @@ export default function CodePage(props) {
 			display: page == "CodePage" ? "flex" : "none"
 		}}>
 			<CodeEditor onCursorChange={(line, column) => setCursor([line, column])}/>
-			<CodeTerminal isLoading={room.terminal.isLoading} onRunClicked={() => socket.emit("run-code", room.roomID)} onModeChange={(val) => socket.emit("mode-changed", val, room.roomID)} modes={room.textEditor.modes} cursorLine={cursor[0]} cursorColumn={cursor[1]}/>
+			<CodeTerminal value={room.terminal.output} isLoading={room.terminal.isLoading} onRunClicked={() => socket.emit("run-code", room.roomID)} onModeChange={(val) => socket.emit("mode-changed", val, room.roomID)} modes={room.textEditor.modes} cursorLine={cursor[0]} cursorColumn={cursor[1]}/>
 		</div>
 
 	)

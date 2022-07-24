@@ -19,7 +19,7 @@ export default function CodeTerminal(props) {
 				<button onClick={() => props.onRunClicked()}>RUN</button>
 				<select onChange={(e) => props.onModeChange(e.target.value)} value={props.mode}>{options}</select>
 			</div>
-			<textarea disabled value={props.isLoading == true ? "Loading..." : "$"}/>
+			<textarea disabled value={props.isLoading == true ? "Loading..." : props.value}/>
 		</div>
 	)
 }
