@@ -2,12 +2,12 @@
 import { io } from "socket.io-client";
 import { Peer } from "peerjs";
 
-export const socket = io("http://localhost:5000/", {
+export const socket = io("http://localhost:7000/", {
 	reconnection: false
 })
 
 export const peer = new Peer(undefined, {
 	host: "localhost",
-	port: 5000,
+	port: 9000,
 	path: "/peerjs"
 })
