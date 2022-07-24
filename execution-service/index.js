@@ -4,6 +4,8 @@ const app = express();
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 4000;
 
+app.use(bodyParser.json());
+
 app.post("/python", (req, res) => {
 	const scriptID = v4();
 	fs.writeFileSync(`./scripts/${scriptID}.js`, req.body.code);
@@ -12,6 +14,12 @@ app.post("/python", (req, res) => {
 	const error = result.stderr;
 	fs.unlinkSync(`./scripts/${scriptID}.js`);
 	res.send({ output, error });
+})
+
+app.post("/javascript", (req, res) => {
+	const code = req.body.code;
+	const output = "testing"
+	res.send(output)
 })
 
 app.get("/", (req, res) => {
