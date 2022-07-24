@@ -2,6 +2,7 @@
 const { createServer } = require("http");
 const { Server } = require("socket.io")
 const httpServer = createServer();
+const axios = require("axios");
 const PORT = process.env.PORT || 7000;
 const { Room } = require("./utils/Room.js");
 const { User } = require("./utils/User.js");
@@ -55,7 +56,17 @@ io.on("connection", (socket) => {
 	})
 
 	socket.on("run-code", (roomID) => {
-		console.log("RUN CODE!")
+
+		rooms[roomID].terminal.isLoading = true;
+		io.to(roomID).emit("update-room", rooms[roomID]);
+
+		axios.post("http://execution-service:4000/javascript", {
+			code: rooms[roomID].textEditor.value
+		}).then((res) => {
+			rooms[roomID].terminal.isLoading = false;
+			rooms[roomID].terminal.output = res.data;
+			io.to(roomID).emit("update-room", rooms[roomID]);
+		})
 	})
 
 	socket.on("disconnecting", () => {
