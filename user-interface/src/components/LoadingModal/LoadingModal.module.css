@@ -1,0 +1,62 @@
+
+.window {
+	background-color: #242424;
+	position: fixed;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	height: 125px;
+	width: 125px;
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.circle {
+	height: 15px;
+	width: 15px;
+	border-radius: 100%;
+	border-style: none;
+	background-color: white;
+	margin: 10px;
+	animation-name: grow;
+	animation-duration: 0.9s;
+	animation-iteration-count: infinite;
+}
+
+.circle:nth-child(1) {
+	animation-delay: 0s;
+}
+
+.circle:nth-child(2) {
+	animation-delay: 0.3s;
+}
+
+.circle:nth-child(3) {
+	animation-delay: 0.6s;
+}
+
+
+
+@keyframes grow {
+	0% { transform: scale(1); }
+	50% { transform: scale(1.5); }
+	100% { transform: scale(1); }
+
+}
+

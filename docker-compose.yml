@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+
+  express-server:
+    image: "codelabs-express-server"
+    build: 
+      context: "./express-server/"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ${PWD}/express-server/public:/app/public
+      - ${PWD}/express-server/index.js:/app/index.js
+      - ${PWD}/express-server/package.json:/app/package.json
+
+  user-interface:
+    image: "codelabs-user-interface"
+    build:
+      context: "./user-interface/"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${PWD}/user-interface/src:/app/src
+      - ${PWD}/user-interface/package.json:/app/package.json
+      - ${PWD}/user-interface/public:/app/public
+
+  peerjs-server:
+    image: "codelabs-peerjs-server"
+    build:
+      context: "./peerjs-server/"
+    ports:
+      - "9000:9000"
+
+  socketio-server:
+    image: "codelabs-socketio-server"
+    build:
+      context: "./socketio-server/"
+    ports:
+      - "7000:7000"
+    volumes:
+      - ${PWD}/socketio-server/utils:/app/utils
+      - ${PWD}/socketio-server/index.js:/app/index.js
+      - ${PWD}/socketio-server/package.json:/app/package.json
+
+  execution-service:
+    image: "codelabs-execution-service"
+    build:
+      context: "./execution-service/"
+    ports:
+      - "4000:4000"
+    volumes:
+      - ${PWD}/execution-service/index.js:/app/index.js
+      - ${PWD}/execution-service/package.json:/app/package.json
+
+  # environment:
+  #   - NODE_OPTIONS=--max-old-space-size=4096
+  

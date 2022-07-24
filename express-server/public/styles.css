@@ -1,0 +1,126 @@
+
+html, body {
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+.canvas {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #242424;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-direction: column;
+}
+
+.canvas h1 {
+	color: lightblue;
+	font-family: "Avenir Black";
+	font-size: 50px;
+	margin: 30px;
+}
+
+.container button {
+	background-color: white;
+	color: #242424;
+	font-family: "Avenir Black";
+	border-style: none;
+	border-radius: 5px;
+	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	font-size: 16px;
+	padding: 5px;
+	padding-left: 40px;
+	padding-right: 40px;
+	transition: all 0.3s ease 0s;
+	margin: 5px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.container input {
+	background-color: transparent;
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 1000px;
+	border-color: grey;
+	outline: none;
+	font-size: 14px;
+	padding: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-family: "Avenir Light";
+	margin: 5px;
+	color: grey;
+}
+
+.canvas button:hover {
+	background-color: #2F66D1;
+	color: white;
+}
+
+.footer {
+	text-align: center;
+	color: grey;
+	font-size: 12px;
+	font-family: "Avenir";
+	margin: 30px;
+}
+
+.footer a {
+	text-decoration: none;
+	color: lightblue;
+	cursor: pointer;
+}
+
+.lock-screen {
+	background-color: white;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.lock-screen svg {
+	margin-bottom: 10px;
+}
+
+.lock-screen hr {
+	width: 300px; 
+	margin: 20px;
+}
+
+.lock-screen a {
+	text-decoration: none;
+}
+
+.lock-screen h1 {
+	font-family: "Avenir Light";
+	font-size: 20px;
+	color: grey;
+}
+
+.lock-screen h2 {
+	font-family: "Avenir Black";
+	font-size: 20px;
+}
+
+.lock-screen h3 {
+	font-family: "Avenir Light";
+	font-size: 16px;
+	color: grey;
+}
+
+.lock-screen h1, .lock-screen h2, .lock-screen h3 {
+	margin: 5px;
+}

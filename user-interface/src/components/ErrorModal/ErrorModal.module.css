@@ -1,0 +1,84 @@
+
+.window {
+	background-color: transparent;
+	position: absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+
+}
+
+.modal {
+	height: 200px;
+	width: 300px;
+	background-color: green;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-radius: 10px;
+	overflow: hidden;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+
+}
+
+.modal .header {
+	background-color: #EC746E;
+	height: 50%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal .footer {
+	height: 50%;
+	background-color: white;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.modal .header h1 {
+	color: white;
+	font-size: 75px;
+	font-family: "Calibri";
+	text-align: center;
+	margin: 0px;
+	padding: 0px;
+}
+
+.modal .footer h1 {
+	font-family: "Avenir";
+	font-size: 15px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.modal .footer p {
+	font-family: "Avenir";
+	font-size: 10px;
+	margin: 5px;
+	margin-bottom: 10px;
+	padding: 0px;
+
+}
+
+.modal .footer button {
+	background-color: #374259;
+	font-family: "Avenir Black";
+	color: white;
+	width: 150px;
+	height: 25px;
+	cursor: pointer;
+	border-style: none;
+	border-radius: 5px;
+
+}

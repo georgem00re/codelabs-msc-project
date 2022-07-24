@@ -1,0 +1,39 @@
+
+.container {
+	height: 200px;
+	width: 300px;
+	background-color: #2E2E2E;
+	margin: 20px;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.container video {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	transform: scaleX(-1);
+	z-index: 1;
+}
+
+.container h2 {
+	position: absolute;
+	color: white;
+	font-size: 75px;
+	margin: 0px;
+	padding: 0px;
+	z-index: 0;
+}
+
+.container h1 {
+	position: absolute;
+	background-color: black;
+	color: white;
+	font-size: 10px;
+	z-index: 100;
+}

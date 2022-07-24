@@ -1,0 +1,55 @@
+
+.navbar {
+	background-color: #2E2E2E;
+	height: 50px;
+	width: 100%;
+
+	border-color: #1A1A1A;
+	border-width: 1px;
+	border-style: none;
+	border-bottom-style: solid;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	overflow: hidden;
+	z-index: 1;
+}
+
+.button {
+	background-color: transparent;
+	height: 100%;
+	width: 60px;
+	border-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.button svg {
+	width: 20px;
+	height: 20px;
+	margin: 0px;
+	fill: grey;
+}
+
+.button h1 {
+	color: #B2B1AB;
+	font-family: "Avenir Light";
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.selected h1 {
+	color: white;
+}
+
+.button:hover h1 {
+	color: white;
+}
