@@ -2,7 +2,7 @@
 class Terminal {
 	constructor() {
 		this.isLoading = false;
-		this.output = "";
+		this.output = "$";
 	}
 
 	setOutput(val) {

@@ -1,82 +1,113 @@
 
 .container {
-	background-color: green;
 	width: 100%;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	flex-direction: column;
+
 }
 
-.footer {
-	height: 25px;
+.header {
 	min-height: 25px;
+	max-height: 25px;
 	width: 100%;
 	background-color: #2E2E2E;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-direction: row;
-	border-top-style: solid;
+	border-style: solid;
 	border-width: 1px;
 	border-color: #1A1A1A;
 }
 
-.footer button {
-	font-family: "Avenir-Book";
-	font-weight: bold;
-	background-color: transparent;
-	margin: 0px;
-	padding: 0px;
-	border-style: none;
-	height: fit-content;
-	width: fit-content;
-	font-size: 11px;
-	margin-left: 20px;
-	margin-right: 20px;
-	color: #B2B1AC;
-	cursor: pointer;
-	text-transform: capitalize;
-}
-
-.footer button:hover {
-	color: white;
-}
-
-.footer h1 {
-	font-family: "Avenir-Book";
-	font-size: 11px;
-	margin: 0px;
-	padding: 0px;
-	margin-left: 20px;
-	margin-right: 20px;
-	color: #B2B1AC;
-	cursor: default;
-}
-
-.footer select {
-	background-color: #2E2E2E;
-	font-size: 11px;
-	color: #B2B1AC;
-	outline: none;
-	font-family: "Avenir-Book";
-	font-weight: bold;
-	margin: 0px;
-	margin-left: 20px;
-	margin-right: 20px;
-	cursor: pointer;
-	border-style: none;
-	text-transform: capitalize;
-}
-
-.footer select:hover {
-	color: white;
-}
-
-.container textarea {
-	width: 100%;
-	height: 100%;
-	margin: 0px;
-	padding: 10px;
+.console {
+	flex-grow: 1;
 	background-color: #212121;
+	padding: 10px;
+	overflow: hidden;
+}
+
+.console textarea {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	background-color: transparent;
 	border-style: none;
 	resize: none;
 	outline: none;
 	color: #B2B1AC;
+}
+
+.terminalButton {
+	height: 25px;
+	background-color: transparent;
+	color: #B2B1AB;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	border-style: none;
+	padding: 10px;
+	margin-left: 10px;
+}
+
+.terminalButton h1 {
+	color: #B2B1AB;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+	font-size: 11px;
+	margin-left: 5px;
+	font-family: "Avenir Heavy";
+	border-style: none;
+}
+
+.terminalButton h1:hover {
+	color: white;
+}
+
+.dropdown {
+	height: 25px;
+	background-color: transparent;
+	padding: 0px;
+	font-size: 11px;
+	color: #B2B1AC;
+	outline: none;
+	font-family: "Avenir-Book";
+	font-weight: bold;
+	margin-right: 10px;
+	cursor: pointer;
+	border-style: none;
+	text-transform: capitalize;
+	margin-left: 0px;
+}
+
+.dropdown:hover {
+	color: white;
+}
+
+.runButton {
+	background-color: transparent;
+	height: 30px;
+	width: 30px;
+	margin: 0px;
+	padding: 0px;
+	border-style: none;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.right {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
 }
