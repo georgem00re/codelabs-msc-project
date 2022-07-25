@@ -21,7 +21,7 @@ export default function CodeTerminal(props) {
 				</div>
 			</div>
 			<div className={styles.console}>
-				<textarea disabled value={props.isLoading == true ? "Loading..." : props.value}/>
+				{ props.isLoading == true ? <LoadingSpinner/> : <textarea disabled value={props.value}/> }
 			</div>
 		</div>
 	)
@@ -76,5 +76,11 @@ function RunIcon(props) {
 		        </g>
 		    </g>
 		</svg>
+	)
+}
+
+function LoadingSpinner(props) {
+	return (
+		<div className={styles.loadingSpinner}></div>
 	)
 }
