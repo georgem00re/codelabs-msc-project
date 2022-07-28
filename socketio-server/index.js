@@ -2,7 +2,6 @@
 const { createServer } = require("http");
 const { Server } = require("socket.io")
 const httpServer = createServer();
-const axios = require("axios");
 const PORT = process.env.PORT || 7000;
 const { Room } = require("./utils/Room.js");
 const { User } = require("./utils/User.js");
@@ -11,7 +10,7 @@ const rooms = {};
 
 const io = new Server(httpServer, {
 	cors: {
-		origin: "http://localhost:3000",
+		origin: "*",
 		methods: ["GET", "POST"]
 	}
 });
@@ -60,11 +59,21 @@ io.on("connection", (socket) => {
 		rooms[roomID].terminal.isLoading = true;
 		io.to(roomID).emit("update-room", rooms[roomID]);
 
-		axios.post("http://execution-service:4000/javascript", {
-			code: rooms[roomID].textEditor.value
+		fetch(`http://execution-service:4000/${rooms[roomID].textEditor.mode}`, { 
+			method: "POST", 
+			headers: { "Content-Type": "application/json" }, 
+			body: JSON.stringify({ code: rooms[roomID].textEditor.value }),
+			keepalive: true
 		}).then((res) => {
+			return res.json();
+		}).then((data) => {
 			rooms[roomID].terminal.isLoading = false;
-			rooms[roomID].terminal.output = res.data;
+			rooms[roomID].terminal.output = data.output;
+			io.to(roomID).emit("update-room", rooms[roomID]);
+		}).catch((err) => {
+			console.log(err);
+			rooms[roomID].terminal.isLoading = false;
+			rooms[roomID].terminal.output = err.message;
 			io.to(roomID).emit("update-room", rooms[roomID]);
 		})
 	})

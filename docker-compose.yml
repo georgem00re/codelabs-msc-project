@@ -51,6 +51,7 @@ services:
     volumes:
       - ${PWD}/execution-service/index.js:/app/index.js
       - ${PWD}/execution-service/package.json:/app/package.json
+      - /var/run/docker.sock:/var/run/docker.sock
 
   # environment:
   #   - NODE_OPTIONS=--max-old-space-size=4096
