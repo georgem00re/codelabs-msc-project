@@ -8,7 +8,7 @@ import "codemirror/theme/material-darker.css";
 import "./CodeMirror.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { socket } from "../../utils.js";
+import { socket } from "../../App.js";
 
 export default function CodeEditor(props) {
 

@@ -1,6 +1,6 @@
 
 import styles from "./MessageBubble.module.css";
-import { socket } from "../../utils.js";
+import { socket } from "../../App.js";
 
 export default function MessageBubble(props) {
 

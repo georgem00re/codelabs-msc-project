@@ -10,7 +10,7 @@ import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
 import LockIcon from "../../icons/LockIcon/LockIcon.js";
 import UnlockIcon from "../../icons/UnlockIcon/UnlockIcon.js";
-import { socket } from "../../utils.js";
+import { socket } from "../../App.js";
 
 export default function NavigationBar(props) {
 

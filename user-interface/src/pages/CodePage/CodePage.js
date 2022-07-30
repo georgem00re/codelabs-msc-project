@@ -1,6 +1,6 @@
 
 import styles from "./CodePage.module.css";
-import { socket } from "../../utils.js";
+import { socket } from "../../App.js";
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react";
 import CodeTerminal from "../../components/CodeTerminal/CodeTerminal.js";

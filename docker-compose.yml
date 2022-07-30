@@ -36,11 +36,13 @@ services:
     build:
       context: "./socketio-server/"
     ports:
-      - "7000:7000"
+      - "0:7000"
     volumes:
       - ${PWD}/socketio-server/utils:/app/utils
       - ${PWD}/socketio-server/index.js:/app/index.js
       - ${PWD}/socketio-server/package.json:/app/package.json
+    profiles:
+      - donotstart
 
   execution-service:
     image: "codelabs-execution-service"
@@ -51,6 +53,17 @@ services:
     volumes:
       - ${PWD}/execution-service/index.js:/app/index.js
       - ${PWD}/execution-service/package.json:/app/package.json
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  matchmaker:
+    image: "codelabs-matchmaker"
+    build:
+      context: "./matchmaker/"
+    ports:
+      - "10000:10000"
+    volumes:
+      - ${PWD}/matchmaker/index.js:/app/index.js
+      - ${PWD}/matchmaker/package.json:/app/package.json
       - /var/run/docker.sock:/var/run/docker.sock
 
   # environment:

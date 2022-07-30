@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./ChatPage.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { socket } from "../../utils.js"
+import { socket } from "../../App.js"
 import { useSelector } from "react-redux";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.js";
 

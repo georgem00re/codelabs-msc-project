@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./VideoStream.module.css";
-import { peer } from "../../utils.js";
+import { peer } from "../../App.js";
 
 export default function VideoStream(props) {
 

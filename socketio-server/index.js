@@ -18,8 +18,10 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
 
 	const user = new User(socket.id);
+	console.log("CONNECTION!")
 
 	socket.on("join-room", (roomID, peerID, nickname) => {
+		console.log("JOIN ROOM")
 		user.setPeerID(peerID);
 		user.setDisplayName( nickname == null ? "Anonymous" : nickname )
 		if (rooms[roomID] == undefined) {
