@@ -11,8 +11,7 @@ export default class LoadingModal extends React.Component {
 				<div className={styles.modal}>
 					<div className={styles.container}>
 						<div className={styles.circle}></div>
-						<div className={styles.circle}></div>
-						<div className={styles.circle}></div>
+						<h1>Connecting...</h1>
 					</div>
 				</div>
 			</div>, document.getElementById("portal")
