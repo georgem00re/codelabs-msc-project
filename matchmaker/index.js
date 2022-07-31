@@ -5,14 +5,13 @@ const PORT = process.env.PORT || 10000;
 const bodyParser = require("body-parser");
 const Docker = require("dockerode");
 const cors = require("cors");
-const rooms = {};
 
 const docker = new Docker({
 	socketPath: "/var/run/docker.sock"
 })
 
-async function spawnContainer() {
-	const options = { Image: "codelabs-socketio-server", HostConfig: { PortBindings: { "7000/tcp": [{ HostPort: "0" }] }}, ExposedPorts: { "7000/tcp": {} } }
+async function spawnContainer(roomID) {
+	const options = { Image: "codelabs-socketio-server", name: roomID ,HostConfig: { PortBindings: { "7000/tcp": [{ HostPort: "0" }] }}, ExposedPorts: { "7000/tcp": {} } }
 	const container = await docker.createContainer(options);
 	const containerID = container.id;
 	await container.start();
@@ -27,18 +26,24 @@ app.post("/", (req,res) => {
 
 	const roomID = req.body.roomID;
 
-	if (rooms[roomID] != undefined) { 
-		res.send({ port: rooms[req.body.roomID].port.toString() })
-		return;
-	}
-
-	spawnContainer()
-		.then((port) => {
-			rooms[roomID] = { port: port }
-			res.send({ port: port.toString() })
+	docker.listContainers({ all: false })
+		.then((containers) => {
+			console.log(containers);
+			return containers.filter((container) => {
+				return container.Names[0] == "/" + roomID;
+			})
+		}).then((containers) => {
+			if (containers.length == 0) {
+				spawnContainer(roomID).then((port) => {
+					res.send({ port: port.toString() })
+				})
+			} else if (containers.length > 0) {
+				res.send({ port: containers[0].Ports[0].PublicPort })
+			}
 		}).catch((err) => {
 			res.send(err);
 		})
+
 })
 
 
