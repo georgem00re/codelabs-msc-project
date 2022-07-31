@@ -8,8 +8,6 @@ import CodeIcon from "../../icons/CodeIcon/CodeIcon.js";
 import ExitIcon from "../../icons/ExitIcon/ExitIcon.js";
 import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
-import LockIcon from "../../icons/LockIcon/LockIcon.js";
-import UnlockIcon from "../../icons/UnlockIcon/UnlockIcon.js";
 import { socket } from "../../App.js";
 
 export default function NavigationBar(props) {
@@ -25,7 +23,6 @@ export default function NavigationBar(props) {
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
 			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
 			<ShareButton onClick={() => navigator.clipboard.writeText(window.location)}/>
-			<LockButton locked={room.isLocked} onClick={ () => socket.emit("toggle-lock", room.roomID) }/>
 		</nav>
 	)
 }
@@ -80,15 +77,6 @@ export function ChatButton(props) {
 	return (
 		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Chat">
 			<ChatIcon fill={props.selected == true ? "white" : color}/>
-		</NavigationBarButton>
-	)
-}
-
-export function LockButton(props) {
-	const [color, setColor] = useState("#B2B1AB");
-	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Lock">
-			{ props.locked == true ? <LockIcon fill={props.selected == true ? "white" : color}/> : <UnlockIcon fill={props.selected == true ? "white" : color}/>}
 		</NavigationBarButton>
 	)
 }
