@@ -1,6 +1,7 @@
 
 import styles from "./CodeTerminal.module.css";
 import { useState } from "react";
+import { primaryColour } from "../../colours.js";
 
 export default function CodeTerminal(props) {
 
@@ -43,7 +44,7 @@ function TerminalIcon(props) {
 function TerminalButton(props) {
 	const [color, setColor] = useState("#B2B1AB");
 	return (
-		<button className={styles.terminalButton} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
+		<button className={styles.terminalButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
 			<TerminalIcon fill={color}/>
 			<h1 style={{ color: color }}>Terminal</h1>
 		</button>
@@ -51,8 +52,9 @@ function TerminalButton(props) {
 }
 
 function DropdownButton(props) {
+	const [color, setColor] = useState("#B2B1AB")
 	return (
-		<select className={styles.dropdown} onChange={props.onChange} value={props.mode}>
+		<select style={{ color: color }} className={styles.dropdown} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onChange={props.onChange} value={props.mode}>
 			{props.children}
 		</select>
 	)
@@ -61,7 +63,7 @@ function DropdownButton(props) {
 function RunButton(props) {
 	const [color, setColor] = useState("#B2B1AB");
 	return (
-		<button className={styles.runButton} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
+		<button className={styles.runButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
 			<RunIcon fill={color}/>
 		</button>
 	)

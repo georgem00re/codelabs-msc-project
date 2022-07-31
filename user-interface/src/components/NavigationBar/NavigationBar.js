@@ -9,6 +9,7 @@ import ExitIcon from "../../icons/ExitIcon/ExitIcon.js";
 import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
 import { socket } from "../../App.js";
+import { lightGrey, primaryColour } from "../../colours.js";
 
 export default function NavigationBar(props) {
 
@@ -37,46 +38,46 @@ export function NavigationBarButton(props) {
 }
 
 export function ShareButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState(lightGrey)
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="URL">
-			<ShareIcon fill={props.selected == true ? "white" : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="URL">
+			<ShareIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function CodeButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState(lightGrey)
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Code">
-			<CodeIcon fill={props.selected == true ? "white" : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Code">
+			<CodeIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function ExitButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState(lightGrey)
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Exit">
-			<ExitIcon fill={props.selected == true ? "white" : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Exit">
+			<ExitIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function VideoButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState(lightGrey)
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Video">
-			<VideoIcon fill={props.selected == true ? "white" : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Video">
+			<VideoIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function ChatButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState(lightGrey)
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor("white")} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick} title="Chat">
-			<ChatIcon fill={props.selected == true ? "white" : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Chat">
+			<ChatIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
