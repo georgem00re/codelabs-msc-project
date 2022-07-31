@@ -39,15 +39,18 @@ html, body {
 	padding: 5px;
 	padding-left: 40px;
 	padding-right: 40px;
-	transition: all 0.3s;
-	margin: 5px;
+	transition: all 0.25s;
 	box-shadow: 2px 2px black;
+	width: 100%;
+	box-sizing: border-box;
+	margin-top: 5px;
 }
 
 .container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	width: 190px;
 }
 
 .container input {
@@ -56,23 +59,27 @@ html, body {
 	border-width: 1px;
 	border-radius: 1000px;
 	border-color: #B2B1AB;
+	width: 100%;
 	outline: none;
 	font-size: 15px;
 	padding: 5px;
 	padding-left: 15px;
 	padding-right: 15px;
 	font-family: "Avenir Light";
-	margin: 5px;
 	color: #B2B1AB;
-	box-shadow: 1px 1px black;
+	box-shadow: 2px 2px black;
+	box-sizing: border-box;
+	margin-bottom: 5px;
+}
+
+.container input::placeholder {
+	color: #B2B1AB;
+	opacity: 0.75;
 }
 
 .container button:hover {
-	border-color: #FBA465;
-	background-color: #242424;
-	color: #FBA465;
+	transform: scale(1.1);
 }
-
 
 .footer {
 	text-align: center;
