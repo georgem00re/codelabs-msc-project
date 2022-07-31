@@ -17,27 +17,31 @@ html, body {
 	background-color: #242424;
 	background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%23363636' fill-opacity='0.16' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
+
 .canvas h1 {
-	color: lightblue;
+	color: #FBA465;
 	font-family: "Avenir Black";
-	font-size: 50px;
+	font-size: 60px;
 	margin: 30px;
+	text-shadow: 3px 3px black;
 }
 
 .container button {
 	background-color: white;
 	color: #242424;
 	font-family: "Avenir Black";
-	border-style: none;
+	border-style: solid;
+	border-width: 1px;
+	border-color: transparent;
 	border-radius: 5px;
-	box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 17px;
 	padding: 5px;
 	padding-left: 40px;
 	padding-right: 40px;
-	transition: all 0.3s ease 0s;
+	transition: all 0.3s;
 	margin: 5px;
+	box-shadow: 2px 2px black;
 }
 
 .container {
@@ -47,81 +51,48 @@ html, body {
 }
 
 .container input {
-	background-color: transparent;
+	background-color: #242424;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 1000px;
-	border-color: grey;
+	border-color: #B2B1AB;
 	outline: none;
-	font-size: 14px;
+	font-size: 15px;
 	padding: 5px;
 	padding-left: 15px;
 	padding-right: 15px;
 	font-family: "Avenir Light";
 	margin: 5px;
-	color: grey;
+	color: #B2B1AB;
+	box-shadow: 1px 1px black;
 }
 
-.canvas button:hover {
-	background-color: #2F66D1;
-	color: white;
+.container button:hover {
+	border-color: #FBA465;
+	background-color: #242424;
+	color: #FBA465;
 }
+
 
 .footer {
 	text-align: center;
-	color: grey;
-	font-size: 12px;
+	color: #B2B1AB;
+	font-size: 14px;
 	font-family: "Avenir";
 	margin: 30px;
+	text-shadow: 1px 1px black;
 }
 
 .footer a {
 	text-decoration: none;
-	color: lightblue;
+	color: #FBA465;
 	cursor: pointer;
 }
 
-.lock-screen {
-	background-color: white;
-	position: absolute;
-	height: 100%;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+@keyframes colour-cycle {
+	0% { color: green; }
+	33% { color: pink; }
+	66% { color: blue; }
+	100% { color: purple }
 }
 
-.lock-screen svg {
-	margin-bottom: 10px;
-}
-
-.lock-screen hr {
-	width: 300px; 
-	margin: 20px;
-}
-
-.lock-screen a {
-	text-decoration: none;
-}
-
-.lock-screen h1 {
-	font-family: "Avenir Light";
-	font-size: 20px;
-	color: grey;
-}
-
-.lock-screen h2 {
-	font-family: "Avenir Black";
-	font-size: 20px;
-}
-
-.lock-screen h3 {
-	font-family: "Avenir Light";
-	font-size: 16px;
-	color: grey;
-}
-
-.lock-screen h1, .lock-screen h2, .lock-screen h3 {
-	margin: 5px;
-}
