@@ -35,23 +35,25 @@ export default function App() {
 
 				socket.on("connect", () => {
 					if (socket.id == undefined || peer.id == undefined) { return }
-					socket.emit("join-room", roomID, peer.id, nickname);
+					socket.emit("join-room", peer.id, nickname);
 				})
 
 				peer.on("open", (peerID) => {
 					if (socket.id == undefined || peer.id == undefined) { return }
-					socket.emit("join-room", roomID, peer.id, nickname);
+					socket.emit("join-room", peer.id, nickname);
 				})
 
-				socket.on("update-room", (rm) => {
-					dispatch(updateRoom(rm));
+				socket.on("update-room", (room) => {
+					dispatch(updateRoom(room));
 				})
 				socket.on("disconnect", () => {
 					window.location.href = "http://localhost:5000";
 				})
 
 			}).catch((err) => {
-				console.log(err)
+				console.log(err);
+				// present error modal!
+				// then redirect users back tyo landing pager
 			})
 
 	},[])

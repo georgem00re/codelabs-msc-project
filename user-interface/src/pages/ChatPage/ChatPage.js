@@ -19,7 +19,7 @@ export default function ChatPage() {
 	});
 
 	const sendMessage = (msg) => {
-		socket.emit("send-message", msg, room.roomID);
+		socket.emit("send-message", msg);
 	}
 
 	return (

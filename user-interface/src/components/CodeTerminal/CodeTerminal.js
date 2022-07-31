@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function CodeTerminal(props) {
 
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(false);
 	const options = props.modes.map((value, index) => {
 		return <option key={index} value={value}>{value}</option>
 	})

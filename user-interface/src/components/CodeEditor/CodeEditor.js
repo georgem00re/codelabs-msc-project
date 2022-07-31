@@ -27,7 +27,7 @@ export default function CodeEditor(props) {
 		editor.on("change", (instance, changes) => {
 			const { origin } = changes;
 			if (origin !== "setValue") {
-				socket.emit("code-changed", instance.getValue(), room.roomID);
+				socket.emit("code-changed", instance.getValue());
 			}
 		})
 
