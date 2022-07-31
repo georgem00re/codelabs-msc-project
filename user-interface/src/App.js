@@ -46,6 +46,10 @@ export default function App() {
 				socket.on("update-room", (rm) => {
 					dispatch(updateRoom(rm));
 				})
+				socket.on("disconnect", () => {
+					window.location.href = "http://localhost:5000";
+				})
+
 			}).catch((err) => {
 				console.log(err)
 			})
