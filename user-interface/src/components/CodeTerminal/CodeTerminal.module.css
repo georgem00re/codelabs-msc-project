@@ -114,15 +114,18 @@
 }
 
 .loadingSpinner {
-	height: 15px;
-	width: 15px;
+	height: 12px;
+	width: 12px;
 	background-color: transparent;
 	border-radius: 50%;
-	border-bottom-style: solid;
-	border-top-style: solid;
-	border-width: 2px;
-	border-color: #B2B1AB;
-	animation: spin 1s linear infinite;
+	border-style: solid;
+	border-color: transparent;
+	border-width: 1.5px;
+	border-top-color: #B2B1AB;
+	border-bottom-color: #B2B1AB;
+	animation-name: spin;
+	animation-duration: 0.9s;
+	animation-iteration-count: infinite;
 }
 
 @keyframes spin {
