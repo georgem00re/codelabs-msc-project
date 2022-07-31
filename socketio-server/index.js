@@ -6,7 +6,8 @@ const PORT = process.env.PORT || 7000;
 const { Room } = require("./utils/Room.js");
 const { User } = require("./utils/User.js");
 const { Message } = require("./utils/Message.js");
-const rooms = {};
+const room = new Room();
+const roomID = process.env.ROOM_ID;
 
 const io = new Server(httpServer, {
 	cors: {
@@ -18,72 +19,61 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
 
 	const user = new User(socket.id);
-	console.log("CONNECTION!")
 
-	socket.on("join-room", (roomID, peerID, nickname) => {
-		console.log("JOIN ROOM")
+	socket.on("join-room", (peerID, nickname) => {
 		user.setPeerID(peerID);
 		user.setDisplayName( nickname == null ? "Anonymous" : nickname )
-		if (rooms[roomID] == undefined) {
-			const room = new Room(roomID);
-			room.addUser(user);
-			rooms[roomID] = room;
-		} else if (rooms[roomID] != undefined) {
-			rooms[roomID].addUser(user);
-		}
-		socket.join(roomID);
-		io.to(roomID).emit("update-room", rooms[roomID]);
+		room.addUser(user);
+		io.sockets.emit("update-room", room);
 	})
 
-	socket.on("send-message", (msg, roomID) => {
+	socket.on("send-message", (msg) => {
 		const message = new Message(msg, socket.id, user.displayName);
-		rooms[roomID].chat.addMessage(message);
-		io.to(roomID).emit("update-room", rooms[roomID]);
+		room.chat.addMessage(message);
+		io.sockets.emit("update-room", room);
 	})
 
-	socket.on("mode-changed", (mode, roomID) => {
-		rooms[roomID].textEditor.mode = mode;
-		io.to(roomID).emit("update-room", rooms[roomID]);
+	socket.on("mode-changed", (mode) => {
+		room.textEditor.mode = mode;
+		io.sockets.emit("update-room", room);
 	})
 
-	socket.on("code-changed", (val, roomID) => {
-		rooms[roomID].textEditor.value = val;
-		io.to(roomID).emit("update-room", rooms[roomID]);
+	socket.on("code-changed", (value) => {
+		room.textEditor.value = value;
+		io.sockets.emit("update-room", room);
 	})
 
-	socket.on("toggle-lock", (roomID) => {
-		rooms[roomID].toggleLock();
-		io.to(roomID).emit("update-room", rooms[roomID]);
-	})
+	socket.on("run-code", () => {
 
-	socket.on("run-code", (roomID) => {
+		room.terminal.isLoading = true;
+		io.sockets.emit("update-room", room);
 
-		rooms[roomID].terminal.isLoading = true;
-		io.to(roomID).emit("update-room", rooms[roomID]);
-
-		fetch(`http://execution-service:4000/${rooms[roomID].textEditor.mode}`, { 
+		fetch(`http://execution-service:4000/${room.textEditor.mode}`, { 
 			method: "POST", 
 			headers: { "Content-Type": "application/json" }, 
-			body: JSON.stringify({ code: rooms[roomID].textEditor.value }),
+			body: JSON.stringify({ code: room.textEditor.value }),
 			keepalive: true
 		}).then((res) => {
 			return res.json();
 		}).then((data) => {
-			rooms[roomID].terminal.isLoading = false;
-			rooms[roomID].terminal.output = data.output;
-			io.to(roomID).emit("update-room", rooms[roomID]);
+			room.terminal.isLoading = false;
+			room.terminal.output = data.output;
+			io.sockets.emit("update-room", room);
 		}).catch((err) => {
 			console.log(err);
-			rooms[roomID].terminal.isLoading = false;
-			rooms[roomID].terminal.output = err.message;
-			io.to(roomID).emit("update-room", rooms[roomID]);
+			room.terminal.isLoading = false;
+			room.terminal.output = err.message;
+			io.sockets.emit("update-room", room);
 		})
 	})
 
 	socket.on("disconnecting", () => {
-		const roomID = Array.from(socket.rooms).filter(item => item != socket.id)[0];
-		if (rooms[roomID] !== undefined) { rooms[roomID].removeUser(user.socketID) };
-		io.to(roomID).emit("update-room", rooms[roomID]);
+		room.removeUser(user.socketID);
+
+		if (Object.keys(room.users).length == 0) {
+			process.exit();
+		}
+		io.sockets.emit("update-room", room);
 	})
 
 })

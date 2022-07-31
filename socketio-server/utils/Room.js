@@ -7,7 +7,6 @@ class Room {
 
 	constructor(roomID) {
 		this.roomID = roomID;
-		this.isLocked = false;
 		this.users = {};
 		this.chat = new Chat();
 		this.textEditor = new TextEditor("Testing!");
@@ -20,10 +19,6 @@ class Room {
 
 	removeUser(socketID) {
 		delete this.users[socketID];
-	}
-
-	toggleLock() {
-		this.isLocked = !this.isLocked;
 	}
 
 }
