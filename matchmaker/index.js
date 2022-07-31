@@ -24,12 +24,21 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post("/", (req,res) => {
-	if (rooms[req.body.roomID] != undefined) { res.send(rooms[req.body.roomID].port) }
-	spawnContainer().then((port) => {
-		res.send({ port: port.toString() })
-	}).catch((err) => {
-		res.send(err);
-	})
+
+	const roomID = req.body.roomID;
+
+	if (rooms[roomID] != undefined) { 
+		res.send({ port: rooms[req.body.roomID].port.toString() })
+		return;
+	}
+
+	spawnContainer()
+		.then((port) => {
+			rooms[roomID] = { port: port }
+			res.send({ port: port.toString() })
+		}).catch((err) => {
+			res.send(err);
+		})
 })
 
 
