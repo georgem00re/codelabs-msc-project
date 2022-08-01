@@ -1,5 +1,5 @@
 
-export default function ShareIcon(props) {
+export default function CopyIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
 	    	<title>ShareIcon</title>

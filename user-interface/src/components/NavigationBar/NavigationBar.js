@@ -3,11 +3,13 @@ import styles from "./NavigationBar.module.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCodePage, selectVideoPage, selectChatPage } from "../../state/actions.js";
-import ShareIcon from "../../icons/ShareIcon/ShareIcon.js";
+import CopyIcon from "../../icons/CopyIcon/CopyIcon.js";
 import CodeIcon from "../../icons/CodeIcon/CodeIcon.js";
 import ExitIcon from "../../icons/ExitIcon/ExitIcon.js";
 import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
+import GroupIcon from "../../icons/GroupIcon/GroupIcon.js";
+import TickIcon from "../../icons/TickIcon/TickIcon.js";
 import { socket } from "../../App.js";
 import { lightGrey, primaryColour } from "../../colours.js";
 
@@ -23,7 +25,7 @@ export default function NavigationBar(props) {
 			<ChatButton selected={page == "ChatPage" ? true : false} onClick={() => dispatch(selectChatPage())}/>
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
 			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
-			<ShareButton onClick={() => navigator.clipboard.writeText(window.location)}/>
+			<ShareButton/>
 		</nav>
 	)
 }
@@ -38,10 +40,27 @@ export function NavigationBarButton(props) {
 }
 
 export function ShareButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const [text, setText] = useState("Share");
+	const [icon, setIcon] = useState("GroupIcon");
+
+	const currentIcon = icon == "GroupIcon" ? <GroupIcon fill={props.selected == true ? primaryColour : color}/> : icon == "CopyIcon" ?  <CopyIcon fill={props.selected == true ? primaryColour : color}/> : <TickIcon fill={props.selected == true ? primaryColour : color}/>
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="URL">
-			<ShareIcon fill={props.selected == true ? primaryColour : color}/>
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => {
+			setColor(primaryColour);
+			setText("Copy URL");
+			setIcon("CopyIcon");
+		}} onMouseLeave={() => {
+			setColor(lightGrey)
+			setText("Share");
+			setIcon("GroupIcon");
+		}} onClick={() => {
+			setText("Copied!");
+			setIcon("TickIcon");
+			navigator.clipboard.writeText(window.location)
+		}} title={text}>
+			{currentIcon}
 		</NavigationBarButton>
 	)
 }
