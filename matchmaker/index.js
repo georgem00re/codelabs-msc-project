@@ -28,7 +28,6 @@ app.post("/", (req,res) => {
 
 	docker.listContainers({ all: false })
 		.then((containers) => {
-			console.log(containers);
 			return containers.filter((container) => {
 				return container.Names[0] == "/" + roomID;
 			})
