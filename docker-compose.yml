@@ -12,6 +12,12 @@ services:
       - ${PWD}/express-server/public:/app/public
       - ${PWD}/express-server/index.js:/app/index.js
       - ${PWD}/express-server/package.json:/app/package.json
+    depends_on:
+      - user-interface
+      - peerjs-server
+      - execution-service
+      - matchmaker
+    network_mode: "bridge"
 
   user-interface:
     image: "codelabs-user-interface"
@@ -23,6 +29,7 @@ services:
       - ${PWD}/user-interface/src:/app/src
       - ${PWD}/user-interface/package.json:/app/package.json
       - ${PWD}/user-interface/public:/app/public
+    network_mode: "bridge"
 
   peerjs-server:
     image: "codelabs-peerjs-server"
@@ -30,6 +37,7 @@ services:
       context: "./peerjs-server/"
     ports:
       - "9000:9000"
+    network_mode: "bridge"
 
   socketio-server:
     image: "codelabs-socketio-server"
@@ -41,8 +49,7 @@ services:
       - ${PWD}/socketio-server/utils:/app/utils
       - ${PWD}/socketio-server/index.js:/app/index.js
       - ${PWD}/socketio-server/package.json:/app/package.json
-    profiles:
-      - donotstart
+    network_mode: "bridge"
 
   execution-service:
     image: "codelabs-execution-service"
@@ -54,6 +61,7 @@ services:
       - ${PWD}/execution-service/index.js:/app/index.js
       - ${PWD}/execution-service/package.json:/app/package.json
       - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: "bridge"
 
   matchmaker:
     image: "codelabs-matchmaker"
@@ -65,6 +73,7 @@ services:
       - ${PWD}/matchmaker/index.js:/app/index.js
       - ${PWD}/matchmaker/package.json:/app/package.json
       - /var/run/docker.sock:/var/run/docker.sock
+    network_mode: "bridge"
 
   # environment:
   #   - NODE_OPTIONS=--max-old-space-size=4096
