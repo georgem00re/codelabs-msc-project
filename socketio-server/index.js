@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
 		room.terminal.isLoading = true;
 		io.sockets.emit("update-room", room);
 
-		fetch(`http://execution-service:4000/${room.textEditor.mode}`, { 
+		fetch(`http://172.17.0.1:4000/${room.textEditor.mode}`, { 
 			method: "POST", 
 			headers: { "Content-Type": "application/json" }, 
 			body: JSON.stringify({ code: room.textEditor.value }),
