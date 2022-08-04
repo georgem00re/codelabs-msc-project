@@ -1,22 +1,15 @@
 const express = require("express");
-const path = require("path");
 const app = express();
 const PORT = process.env.PORT || 5000;
-const { v4 } = require("uuid");
+const { createRoomController } = require("./controllers/createRoomController.js")
+const { rootController } = require("./controllers/rootController.js")
+const { roomController } = require("./controllers/roomController.js")
 
 app.use(express.static("public"));
 
-app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "views", "landing.html"));
-})
-
-app.get("/create-room", (req, res) => {
-	res.redirect("/room/" + v4());
-})
-
-app.get("/room/:room", (req, res) => {
-	res.redirect("http://localhost:3000/room/" + req.params.room);
-})
+app.get("/", rootController);
+app.get("/create-room", createRoomController);
+app.get("/room/:room", roomController);
 
 app.listen(PORT, () => {
 	console.log(`Listening on port ${PORT}`);

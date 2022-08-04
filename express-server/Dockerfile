@@ -5,6 +5,7 @@ RUN npm install
 
 COPY public /app/public
 COPY views /app/views
+COPY controllers /app/controllers
 COPY index.js .
 EXPOSE 5000
 CMD ["npm", "start"]
