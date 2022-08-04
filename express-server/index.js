@@ -7,7 +7,7 @@ const { v4 } = require("uuid");
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "public", "landing.html"));
+	res.sendFile(path.join(__dirname, "views", "landing.html"));
 })
 
 app.get("/create-room", (req, res) => {
