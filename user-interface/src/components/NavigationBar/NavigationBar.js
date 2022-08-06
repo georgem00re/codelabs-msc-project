@@ -53,7 +53,7 @@ export function UserDropdown(props) {
 export function DropdownCell(props) {
 	return (
 		<div className={styles.dropdownCell}>
-			<PersonIcon fill={"lightGrey"}/>
+			<PersonIcon fill={lightGrey}/>
 			<h3>{props.text}</h3>
 		</div>
 	)
