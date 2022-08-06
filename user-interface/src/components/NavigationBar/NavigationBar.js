@@ -10,6 +10,7 @@ import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
 import GroupIcon from "../../icons/GroupIcon/GroupIcon.js";
 import TickIcon from "../../icons/TickIcon/TickIcon.js";
+import InviteIcon from "../../icons/InviteIcon/InviteIcon.js";
 import { socket } from "../../App.js";
 import { lightGrey, primaryColour } from "../../colours.js";
 
@@ -60,10 +61,10 @@ export function NavigationBarButton(props) {
 
 export function ShareButton(props) {
 	const [color, setColor] = useState(lightGrey);
-	const [text, setText] = useState("Share");
-	const [icon, setIcon] = useState("GroupIcon");
+	const [text, setText] = useState("Invite");
+	const [icon, setIcon] = useState("InviteIcon");
 
-	const currentIcon = icon == "GroupIcon" ? <GroupIcon fill={props.selected == true ? primaryColour : color}/> : icon == "CopyIcon" ?  <CopyIcon fill={props.selected == true ? primaryColour : color}/> : <TickIcon fill={props.selected == true ? primaryColour : color}/>
+	const currentIcon = icon == "InviteIcon" ? <InviteIcon fill={props.selected == true ? primaryColour : color}/> : icon == "CopyIcon" ?  <CopyIcon fill={props.selected == true ? primaryColour : color}/> : <TickIcon fill={props.selected == true ? primaryColour : color}/>
 
 	return (
 		<NavigationBarButton selected={props.selected} onMouseEnter={() => {
@@ -72,8 +73,8 @@ export function ShareButton(props) {
 			setIcon("CopyIcon");
 		}} onMouseLeave={() => {
 			setColor(lightGrey)
-			setText("Share");
-			setIcon("GroupIcon");
+			setText("Invite");
+			setIcon("InviteIcon");
 		}} onClick={() => {
 			setText("Copied!");
 			setIcon("TickIcon");
