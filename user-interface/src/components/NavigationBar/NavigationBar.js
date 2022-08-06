@@ -11,6 +11,7 @@ import ChatIcon from "../../icons/ChatIcon/ChatIcon.js";
 import GroupIcon from "../../icons/GroupIcon/GroupIcon.js";
 import TickIcon from "../../icons/TickIcon/TickIcon.js";
 import InviteIcon from "../../icons/InviteIcon/InviteIcon.js";
+import PersonIcon from "../../icons/PersonIcon/PersonIcon.js";
 import { socket } from "../../App.js";
 import { lightGrey, primaryColour } from "../../colours.js";
 
@@ -27,9 +28,7 @@ export default function NavigationBar(props) {
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
 			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
 			<ShareButton/>
-			<UserDropdown users={Object.keys(room.users).map((user, index) => {
-				return <h1 key={index}>{user.displayName || "Anonymous"}</h1>
-			})}/>
+			<UserDropdown/>
 		</nav>
 	)
 }
@@ -37,15 +36,25 @@ export default function NavigationBar(props) {
 export function UserDropdown(props) {
 
 	const [isVisible, setVisible] = useState(false);
+	const room = useSelector(state => state.room);
 
 	return (
-		<div className={styles.dropdownContainer} onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
-			<UsersButton length={props.users.length}/>
+		<div onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+			<UsersButton length={Object.keys(room.users).length}/>
 			<div className={styles.dropdown} style={{ display: isVisible ? "flex" : "none" }}>
-				{props.users.map((element) => {
-					return <h1>{element}</h1>
+				{Object.keys(room.users).map((element, index) => {
+					return <DropdownCell text={element.displayName || "Anonymous"}/>
 				})}
 			</div>
+		</div>
+	)
+}
+
+export function DropdownCell(props) {
+	return (
+		<div className={styles.dropdownCell}>
+			<PersonIcon fill={"lightGrey"}/>
+			<h3>{props.text}</h3>
 		</div>
 	)
 }
