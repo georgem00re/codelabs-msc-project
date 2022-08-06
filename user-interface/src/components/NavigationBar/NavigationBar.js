@@ -26,7 +26,26 @@ export default function NavigationBar(props) {
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
 			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
 			<ShareButton/>
+			<UserDropdown users={Object.keys(room.users).map((user, index) => {
+				return <h1 key={index}>{user.displayName || "Anonymous"}</h1>
+			})}/>
 		</nav>
+	)
+}
+
+export function UserDropdown(props) {
+
+	const [isVisible, setVisible] = useState(false);
+
+	return (
+		<div className={styles.dropdownContainer} onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+			<UsersButton length={props.users.length}/>
+			<div className={styles.dropdown} style={{ display: isVisible ? "flex" : "none" }}>
+				{props.users.map((element) => {
+					return <h1>{element}</h1>
+				})}
+			</div>
+		</div>
 	)
 }
 
@@ -97,6 +116,16 @@ export function ChatButton(props) {
 	return (
 		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Chat">
 			<ChatIcon fill={props.selected == true ? primaryColour : color}/>
+		</NavigationBarButton>
+	)
+}
+
+export function UsersButton(props) {
+	const [color, setColor] = useState(lightGrey)
+	return (
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Users">
+			<GroupIcon fill={props.selected == true ? primaryColour : color}/>
+			<h2 className={styles.number} style={{ color }}>{props.length}</h2>
 		</NavigationBarButton>
 	)
 }

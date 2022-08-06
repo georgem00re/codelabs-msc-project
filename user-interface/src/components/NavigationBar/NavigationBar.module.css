@@ -13,7 +13,6 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: row;
-	overflow: hidden;
 	z-index: 1;
 }
 
@@ -52,4 +51,39 @@
 
 .button:hover h1 {
 	color: #FBA465;
+}
+
+.dropdownContainer {
+
+}
+
+
+.dropdown {
+	position: absolute;
+	top: 55px;
+	background-color: #2E2E2E;
+	box-shadow: 2px 2px black;
+	z-index: 1;
+	flex-direction: column;
+	min-width: 65px;
+	box-sizing: border-box;
+	padding: 5px;
+}
+
+.dropdown h1 {
+	color: #B2B1AB;
+	margin: 2px;
+	padding: 0px;
+	font-family: "Avenir";
+	font-size: 12px;
+}
+
+.number {
+	position: absolute;
+	transform: translate(13px, -13px);
+	z-index: 2;
+	color: #B2B1AB;
+	font-family: "Avenir";
+	font-size: 10px;
+
 }
