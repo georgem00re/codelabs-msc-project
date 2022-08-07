@@ -66,6 +66,65 @@
 	border-radius: 2px;
 }
 
+.inviteDropdown {
+	position: absolute;
+	top: 55px;
+	background-color: #2E2E2E;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 2px 2px #1A1A1A;
+	border-radius: 2px;
+	box-sizing: border-box;
+
+}
+
+.inviteDropdown h1 {
+	font-family: "Avenir Light";
+	font-size: 12px;
+	color: #B2B1AB;
+	margin: 0px;
+}
+
+.inviteDropdown input {
+	outline: none;
+	margin: 0px;
+	box-sizing: border-box;
+	padding: 5px;
+	border-style: solid;
+	border-color: #B2B1AB;
+	color: #B2B1AB;
+	border-radius: 100px;
+	font-size: 12px;
+	padding-left: 10px;
+	font-family: "Avenir Light";
+	background-color: #242424;
+	border-width: 1px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	width: 200px;
+
+}
+
+.inviteDropdown button {
+	background-color: transparent;
+	border-style: none;
+	cursor: pointer;
+	background-color: white;
+	padding: 5px;
+	font-family: "Avenir Black";
+	font-size: 12px;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 100%;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #B2B1AB;
+	border-left-style: none;
+	color: #242424;
+}
+
 .dropdownCell {
 	display: flex;
 	justify-content: center;

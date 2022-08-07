@@ -27,9 +27,30 @@ export default function NavigationBar(props) {
 			<ChatButton selected={page == "ChatPage" ? true : false} onClick={() => dispatch(selectChatPage())}/>
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
 			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
-			<ShareButton/>
 			<UserDropdown/>
+			<InviteDropdown/>
 		</nav>
+	)
+}
+
+export function InviteDropdown(props) {
+
+	const [isVisible, setVisible] = useState(false);
+	const [text, setText] = useState("Copy Link to Clipboard?")
+
+	return (
+		<div onMouseEnter={() => setVisible(true)} onMouseLeave={() => {
+			setVisible(false);
+			setText("Copy Link to Clipboard?");
+		}}>
+			<ShareButton onClick={() => {
+				navigator.clipboard.writeText(window.location.href);
+				setText("Copied Link to Clipboard!");
+			}}/>
+			<div className={styles.inviteDropdown} style={{ display: isVisible ? "flex" : "none" }}>
+				<h1>{text}</h1>
+			</div>
+		</div>
 	)
 }
 
@@ -39,7 +60,7 @@ export function UserDropdown(props) {
 	const room = useSelector(state => state.room);
 
 	return (
-		<div onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+		<div style={{ height: "100%" }} onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
 			<UsersButton length={Object.keys(room.users).length}/>
 			<div className={styles.dropdown} style={{ display: isVisible ? "flex" : "none" }}>
 				{Object.keys(room.users).map((element, index) => {
@@ -76,20 +97,8 @@ export function ShareButton(props) {
 	const currentIcon = icon == "InviteIcon" ? <InviteIcon fill={props.selected == true ? primaryColour : color}/> : icon == "CopyIcon" ?  <CopyIcon fill={props.selected == true ? primaryColour : color}/> : <TickIcon fill={props.selected == true ? primaryColour : color}/>
 
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => {
-			setColor(primaryColour);
-			setText("Copy URL");
-			setIcon("CopyIcon");
-		}} onMouseLeave={() => {
-			setColor(lightGrey)
-			setText("Invite");
-			setIcon("InviteIcon");
-		}} onClick={() => {
-			setText("Copied!");
-			setIcon("TickIcon");
-			navigator.clipboard.writeText(window.location)
-		}} title={text}>
-			{currentIcon}
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Invite">
+			<InviteIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
