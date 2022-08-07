@@ -1,6 +1,6 @@
 
 .window {
-	background-color: transparent;
+	background-color: rgba(0, 0, 0, 0.4);
 	position: absolute;
 	top: 0px;
 	bottom: 0px;
@@ -9,8 +9,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
-
+	z-index: 1000;
 }
 
 .modal {
@@ -28,7 +27,7 @@
 }
 
 .modal .header {
-	background-color: #EC746E;
+	background-color: #2E2E2E;
 	height: 50%;
 	width: 100%;
 	display: flex;
@@ -47,7 +46,7 @@
 }
 
 .modal .header h1 {
-	color: white;
+	color: #FBA465;
 	font-size: 75px;
 	font-family: "Calibri";
 	text-align: center;
@@ -72,13 +71,13 @@
 }
 
 .modal .footer button {
-	background-color: #374259;
+	background-color: #2E2E2E;
 	font-family: "Avenir Black";
 	color: white;
-	width: 150px;
-	height: 25px;
 	cursor: pointer;
 	border-style: none;
-	border-radius: 5px;
-
+	border-radius: 2px;
+	padding: 5px;
+	padding-left: 30px;
+	padding-right: 30px;
 }

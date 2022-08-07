@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { updateRoom } from "./state/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingModal from "./components/LoadingModal/LoadingModal.js";
@@ -8,6 +8,7 @@ import ChatPage from "./pages/ChatPage/ChatPage.js";
 import VideoPage from "./pages/VideoPage/VideoPage.js";
 import CodePage from "./pages/CodePage/CodePage.js";
 import NicknameModal from "./components/NicknameModal/NicknameModal.js";
+import ErrorModal from "./components/ErrorModal/ErrorModal.js";
 import { io } from "socket.io-client";
 import { Peer } from "peerjs";
 
@@ -18,6 +19,7 @@ export default function App() {
 
 	const room = useSelector(state => state.room);
 	const page = useSelector(state => state.page);
+	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -48,13 +50,11 @@ export default function App() {
 					dispatch(updateRoom(room));
 				})
 				socket.on("disconnect", () => {
-					window.location.href = "http://localhost:5000";
+					setError(true);
 				})
 
 			}).catch((err) => {
-				console.log(err);
-				// present error modal!
-				// then redirect users back tyo landing pager
+				setError(true)
 			})
 
 	},[])
@@ -70,6 +70,7 @@ export default function App() {
 			<VideoPage/>
 			<ChatPage/>
 			<NicknameModal open={false}/>
+			<ErrorModal open={error} onDismiss={() => window.location.href = "http://localhost:5000" }/>
 		</div>
 	)
 }

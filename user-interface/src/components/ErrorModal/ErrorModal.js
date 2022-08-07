@@ -15,7 +15,7 @@ export default class ErrorModal extends React.Component {
 					<div className={styles.footer}>
 						<h1>Ooops!</h1>
 						<p>{this.props.message}</p>
-						<button onClick={this.props.onClose}>Close</button>
+						<button onClick={this.props.onDismiss}>Close</button>
 					</div>
 				</div>
 			</div>,
