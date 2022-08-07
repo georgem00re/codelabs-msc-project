@@ -52,39 +52,23 @@ export default function App() {
 		})
 	}
 
-	useEffect(() => {
+	const initialise = async () => {
 		const roomID = window.location.pathname.replace("/room/", "");
 		const nickname = window.localStorage.getItem("nickname");
+		const port = await fetchPort(roomID);
+		socket = await connectSocket(port);
+		peer = await connectPeer();
+		socket.emit("join-room", peer.id, nickname);
+		socket.on("update-room", (room) => {
+			dispatch(updateRoom(room));
+		})
+		socket.on("disconnect", () => {
+			setError(true);
+		})
+	}
 
-		async function initialise() {
-
-			const port = await fetchPort(roomID);
-			socket = await connectSocket(port);
-			peer = await connectPeer();
-
-			socket.emit("join-room", peer.id, nickname);
-			
-			socket.on("update-room", (room) => {
-				dispatch(updateRoom(room));
-			})
-
-			socket.on("disconnect", () => {
-				setError(true);
-			})
-
-
-			// socket.on("connect", () => {
-			// 	if (socket.id == undefined || peer.id == undefined) { return }
-			// 	socket.emit("join-room", peer.id, nickname);
-			// })
-			// peer.on("open", (peerID) => {
-			// 	if (socket.id == undefined || peer.id == undefined) { return }
-			// 	socket.emit("join-room", peer.id, nickname);
-			// })
-		}
-
+	useEffect(() => {
 		initialise();
-
 	},[])
 
 	if (room == null) { 
