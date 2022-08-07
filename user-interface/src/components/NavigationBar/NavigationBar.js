@@ -26,9 +26,9 @@ export default function NavigationBar(props) {
 			<CodeButton selected={page == "CodePage" ? true : false} onClick={() => dispatch(selectCodePage())}/>
 			<ChatButton selected={page == "ChatPage" ? true : false} onClick={() => dispatch(selectChatPage())}/>
 			<VideoButton selected={page == "VideoPage" ? true : false} onClick={() => dispatch(selectVideoPage())}/>
-			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
 			<UserDropdown/>
 			<InviteDropdown/>
+			<ExitButton onClick={() => window.location = "http://localhost:5000/"}/>
 		</nav>
 	)
 }
@@ -48,6 +48,7 @@ export function InviteDropdown(props) {
 				setText("Copied Link to Clipboard!");
 			}}/>
 			<div className={styles.inviteDropdown} style={{ display: isVisible ? "flex" : "none" }}>
+				<CopyIcon fill={lightGrey}/>
 				<h1>{text}</h1>
 			</div>
 		</div>
@@ -91,13 +92,9 @@ export function NavigationBarButton(props) {
 
 export function ShareButton(props) {
 	const [color, setColor] = useState(lightGrey);
-	const [text, setText] = useState("Invite");
-	const [icon, setIcon] = useState("InviteIcon");
-
-	const currentIcon = icon == "InviteIcon" ? <InviteIcon fill={props.selected == true ? primaryColour : color}/> : icon == "CopyIcon" ?  <CopyIcon fill={props.selected == true ? primaryColour : color}/> : <TickIcon fill={props.selected == true ? primaryColour : color}/>
 
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Invite">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Share">
 			<InviteIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
