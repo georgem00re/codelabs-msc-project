@@ -22,15 +22,19 @@ export default function App() {
 	const [error, setError] = useState(false);
 	const dispatch = useDispatch();
 
+	const fetchPort = async (roomID) => {
+		const res = await fetch("http://localhost:10000", { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
+		const data = await res.json();
+		return data.port;
+	}
+
 	useEffect(() => {
 		const roomID = window.location.pathname.replace("/room/", "");
 		const nickname = window.localStorage.getItem("nickname");
 
 		async function initialise() {
 
-			const res = await fetch("http://localhost:10000", { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
-			const data = await res.json();
-			const port = data.port;
+			const port = await fetchPort(roomID);
 
 			socket = io.connect(`http://localhost:${port}`, { reconnection: true });
 			peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
