@@ -28,6 +28,30 @@ export default function App() {
 		return data.port;
 	}
 
+	const connectSocket = (port) => {
+		return new Promise((resolve, reject) => {
+			const socket = io.connect(`http://localhost:${port}`, { reconnection: true });
+			socket.on("connect", () => {
+				resolve(socket);
+			})
+			setTimeout(() => {
+				reject("Failed to connect to Socket.IO server.")
+			}, 5000)
+		})
+	}
+
+	const connectPeer = () => {
+		return new Promise((resolve, reject) => {
+			const peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
+			peer.on("open", () => {
+				resolve(peer);
+			})
+			setTimeout(() => {
+				reject("Failed to connect to PeerJS server.")
+			}, 5000)
+		})
+	}
+
 	useEffect(() => {
 		const roomID = window.location.pathname.replace("/room/", "");
 		const nickname = window.localStorage.getItem("nickname");
@@ -35,31 +59,31 @@ export default function App() {
 		async function initialise() {
 
 			const port = await fetchPort(roomID);
+			socket = await connectSocket(port);
+			peer = await connectPeer();
 
-			socket = io.connect(`http://localhost:${port}`, { reconnection: true });
-			peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
-
-			socket.on("connect", () => {
-				if (socket.id == undefined || peer.id == undefined) { return }
-				socket.emit("join-room", peer.id, nickname);
-			})
-			peer.on("open", (peerID) => {
-				if (socket.id == undefined || peer.id == undefined) { return }
-				socket.emit("join-room", peer.id, nickname);
-			})
+			socket.emit("join-room", peer.id, nickname);
+			
 			socket.on("update-room", (room) => {
 				dispatch(updateRoom(room));
 			})
+
 			socket.on("disconnect", () => {
 				setError(true);
 			})
+
+
+			// socket.on("connect", () => {
+			// 	if (socket.id == undefined || peer.id == undefined) { return }
+			// 	socket.emit("join-room", peer.id, nickname);
+			// })
+			// peer.on("open", (peerID) => {
+			// 	if (socket.id == undefined || peer.id == undefined) { return }
+			// 	socket.emit("join-room", peer.id, nickname);
+			// })
 		}
 
-		initialise().then(() => {
-			console.log("SUCCESS");
-		}).catch((err) => {
-			console.log("ERROR");
-		})
+		initialise();
 
 	},[])
 
