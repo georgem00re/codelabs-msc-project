@@ -26,36 +26,36 @@ export default function App() {
 		const roomID = window.location.pathname.replace("/room/", "");
 		const nickname = window.localStorage.getItem("nickname");
 
-		fetch("http://localhost:10000", { method: "POST", headers: { "Content-Type": "application/json " }, body: JSON.stringify({ roomID }) })
-			.then((res) => {
-				return res.json();
-			}).then((data) => {
-				return data.port;
-			}).then((port) => {
+		async function initialise() {
 
-				socket = io.connect(`http://localhost:${port}`, { reconnection: true });
-				peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
+			const res = await fetch("http://localhost:10000", { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
+			const data = await res.json();
+			const port = data.port;
 
-				socket.on("connect", () => {
-					if (socket.id == undefined || peer.id == undefined) { return }
-					socket.emit("join-room", peer.id, nickname);
-				})
+			socket = io.connect(`http://localhost:${port}`, { reconnection: true });
+			peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
 
-				peer.on("open", (peerID) => {
-					if (socket.id == undefined || peer.id == undefined) { return }
-					socket.emit("join-room", peer.id, nickname);
-				})
-
-				socket.on("update-room", (room) => {
-					dispatch(updateRoom(room));
-				})
-				socket.on("disconnect", () => {
-					setError(true);
-				})
-
-			}).catch((err) => {
-				setError(true)
+			socket.on("connect", () => {
+				if (socket.id == undefined || peer.id == undefined) { return }
+				socket.emit("join-room", peer.id, nickname);
 			})
+			peer.on("open", (peerID) => {
+				if (socket.id == undefined || peer.id == undefined) { return }
+				socket.emit("join-room", peer.id, nickname);
+			})
+			socket.on("update-room", (room) => {
+				dispatch(updateRoom(room));
+			})
+			socket.on("disconnect", () => {
+				setError(true);
+			})
+		}
+
+		initialise().then(() => {
+			console.log("SUCCESS");
+		}).catch((err) => {
+			console.log("ERROR");
+		})
 
 	},[])
 
