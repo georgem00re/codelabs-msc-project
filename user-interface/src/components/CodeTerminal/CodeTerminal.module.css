@@ -67,10 +67,11 @@
 	margin-left: 5px;
 	font-family: "Avenir Heavy";
 	border-style: none;
+	text-shadow: 1px 1px black;
 }
 
-.terminalButton h1:hover {
-	color: white;
+.terminalButton svg {
+	filter: drop-shadow(1px 1px black);
 }
 
 .dropdown {
@@ -86,6 +87,7 @@
 	border-style: none;
 	text-transform: capitalize;
 	margin-left: 0px;
+	text-shadow: 1px 1px black;
 }
 
 .dropdown:hover {
@@ -103,6 +105,10 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.runButton svg {
+	filter: drop-shadow(1px 1px black);
 }
 
 .right {

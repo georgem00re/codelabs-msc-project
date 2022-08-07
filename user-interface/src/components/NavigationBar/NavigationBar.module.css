@@ -35,6 +35,7 @@
 	height: 20px;
 	margin: 0px;
 	fill: grey;
+	filter: drop-shadow(1px 1px black);
 }
 
 .button h1 {
@@ -43,6 +44,7 @@
 	font-size: 12px;
 	padding: 0px;
 	margin: 0px;
+	text-shadow: 1px 1px black;
 }
 
 .selected h1 {
@@ -82,6 +84,7 @@
 .inviteDropdown svg {
 	height: 18px;
 	width: 18px;
+	filter: drop-shadow(1px 1px black);
 }
 
 .inviteDropdown h1 {
@@ -94,6 +97,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	text-shadow: 1px 1px black;
 }
 
 
@@ -108,6 +112,7 @@
 .dropdownCell svg {
 	height: 15px;
 	width: 15px;
+	filter: drop-shadow(1px 1px black);
 }
 
 .dropdown h3 {
@@ -117,6 +122,7 @@
 	margin: 0px;
 	padding: 0px;
 	margin-left: 5px;
+	text-shadow: 1px 1px black;
 }
 
 .dropdown h1 {
