@@ -65,7 +65,7 @@ export function UserDropdown(props) {
 			<UsersButton length={Object.keys(room.users).length}/>
 			<div className={styles.dropdown} style={{ display: isVisible ? "flex" : "none" }}>
 				{Object.keys(room.users).map((element, index) => {
-					return <DropdownCell text={element.displayName || "Anonymous"}/>
+					return <DropdownCell text={room.users[element].displayName || "Anonymous"}/>
 				})}
 			</div>
 		</div>

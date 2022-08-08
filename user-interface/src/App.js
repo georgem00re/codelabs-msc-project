@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { updateRoom } from "./state/actions.js";
+import { updateRoom  } from "./state/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingModal from "./components/LoadingModal/LoadingModal.js";
 import NavigationBar  from "./components/NavigationBar/NavigationBar.js";
@@ -11,6 +11,7 @@ import NicknameModal from "./components/NicknameModal/NicknameModal.js";
 import ErrorModal from "./components/ErrorModal/ErrorModal.js";
 import { io } from "socket.io-client";
 import { Peer } from "peerjs";
+import React from "react";
 
 export let peer; 
 export let socket;
@@ -20,6 +21,7 @@ export default function App() {
 	const room = useSelector(state => state.room);
 	const page = useSelector(state => state.page);
 	const [error, setError] = useState(false);
+	const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
 	const dispatch = useDispatch();
 
 	const fetchPort = async (roomID) => {
@@ -52,9 +54,8 @@ export default function App() {
 		})
 	}
 
-	const initialise = async () => {
+	const initialise = async (nickname) => {
 		const roomID = window.location.pathname.replace("/room/", "");
-		const nickname = window.localStorage.getItem("nickname");
 		const port = await fetchPort(roomID);
 		socket = await connectSocket(port);
 		peer = await connectPeer();
@@ -68,11 +69,24 @@ export default function App() {
 	}
 
 	useEffect(() => {
-		initialise();
+		const nickname = window.localStorage.getItem("nickname");
+		if (nickname != null) {
+			initialise(nickname);
+		} else {
+			setNicknameModalOpen(true);
+		}
 	},[])
 
 	if (room == null) { 
-		return <LoadingModal/> 
+		return (
+			<React.Fragment>
+				<LoadingModal/>
+				<NicknameModal open={nicknameModalOpen} onSubmit={(nickname) => {
+					initialise(nickname);
+					setNicknameModalOpen(false);
+				}}/>
+			</React.Fragment>
+		)
 	}
 
 	return (
@@ -81,7 +95,6 @@ export default function App() {
 			<CodePage/>
 			<VideoPage/>
 			<ChatPage/>
-			<NicknameModal open={false}/>
 			<ErrorModal open={error} onDismiss={() => window.location.href = "http://localhost:5000" }/>
 		</div>
 	)
