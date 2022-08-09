@@ -54,27 +54,31 @@ export default function App() {
 		})
 	}
 
-	const initialise = async (nickname) => {
-		const roomID = window.location.pathname.replace("/room/", "");
-		const port = await fetchPort(roomID);
-		socket = await connectSocket(port);
-		peer = await connectPeer();
-		socket.emit("join-room", peer.id, nickname);
-		socket.on("update-room", (room) => {
-			dispatch(updateRoom(room));
-		})
-		socket.on("disconnect", () => {
-			setError(true);
-		})
-	}
-
 	useEffect(() => {
-		const nickname = window.localStorage.getItem("nickname");
-		if (nickname != null) {
-			initialise(nickname);
-		} else {
-			setNicknameModalOpen(true);
+
+		const initialise = async () => {
+			const nickname = window.localStorage.getItem("nickname");
+			const roomID = window.location.pathname.replace("/room/", "");
+			const port = await fetchPort(roomID);
+			socket = await connectSocket(port);
+			peer = await connectPeer();
+
+			socket.on("update-room", (room) => {
+				dispatch(updateRoom(room));
+			})
+
+			socket.on("disconnect", () => {
+				setError(true);
+			})
+
+			if (nickname != null) {
+				socket.emit("join-room", peer.id, nickname);
+			} else {
+				setNicknameModalOpen(true);
+			}
 		}
+		initialise();
+
 	},[])
 
 	if (room == null) { 
@@ -82,7 +86,7 @@ export default function App() {
 			<React.Fragment>
 				<LoadingModal/>
 				<NicknameModal open={nicknameModalOpen} onSubmit={(nickname) => {
-					initialise(nickname);
+					socket.emit("join-room", peer.id, nickname);
 					setNicknameModalOpen(false);
 				}}/>
 			</React.Fragment>
