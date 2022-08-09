@@ -16,11 +16,12 @@ export default function NicknameModal(props) {
 		<div className={styles.window}>
 			<div className={styles.modal}>
 				<h1>Join Lab</h1>
-				<input value={window.location.href} type="text" readonly/>
-				<input value={nickname} placeholder="Display Name" type="text" onChange={onInputChange}/>
-				<div>
-					<button className={styles.joinButton} onClick={() => props.onSubmit(nickname)}>Join</button>
+				<span></span>
+				<h2>Enter a display name:</h2>
+				<input value={nickname} placeholder="John Doe" type="text" onChange={onInputChange}/>
+				<div className={styles.container}>
 					<button className={styles.cancelButton} onClick={() => window.location.href = "http://localhost:5000"}>Cancel</button>
+					<button className={styles.joinButton} onClick={() => props.onSubmit(nickname)}>Join</button>
 				</div>
 			</div>
 

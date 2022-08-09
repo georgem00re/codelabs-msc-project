@@ -13,7 +13,7 @@
 }
 
 .modal {
-	background-color: white;
+	background-color: #2E2E2E;
 	z-index: 100;
 	display: flex;
 	flex-direction: column;
@@ -23,62 +23,87 @@
 	padding-right: 30px;
 	justify-content: center;
 	align-items: center;
-	border-radius: 3px;
+	border-radius: 10px;
 	animation: grow 0.5s;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #B2B1AB;
+	border-color: #1A1A1A;
 }
 
 .modal h1 {
 	font-family: "Avenir Black";
-	font-size: 18px;
-	color: #242424;
-	margin: 5px;
+	font-size: 25px;
+	color: #B2B1AB;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	text-align: left;
+	text-shadow: 1px 1px black;
+}
+
+.modal span {
+	width: 100%;
+	background-color: #B2B1AB;
+	height: 1px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
+
+.modal h2 {
+	font-family: "Avenir Light";
+	font-size: 14px;
+	color: #B2B1AB;
+	margin: 0px;
 	padding: 0px;
 	width: 100%;
 	text-align: left;
 }
 
 .modal input {
-	background-color: transparent;
+	background-color: #212121;
 	border-style: solid;
 	border-width: 1px;
 	border-radius: 5px;
-	border-color: #B2B1AB;
-	width: 100%;
+	border-color: #525152;
 	outline: none;
 	font-size: 15px;
 	padding: 5px;
 	font-family: "Avenir Light";
-	color: #242424;
+	color: #B2B1AB;
 	box-sizing: border-box;
-	margin-bottom: 5px;
-	margin-top: 5px;
+	margin-bottom: 15px;
+	margin-top: 10px;
+	width: 300px;
+
 }
 
-.modal button {
+.container {
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+	align-items: center;
+	width: 100%;
+}
+
+.container button {
 	background-color: white;
 	font-family: "Avenir Black";
 	color: #242424;
 	cursor: pointer;
 	border-radius: 2px;
-	margin-top: 10px;
-	border-style: solid;
-	border-color: #B2B1AB;
-	border-width: 1px;
+	border-style: none;
 	width: 75px;
+	height: 30px;
 	margin-left: 5px;
-	margin-right: 5px;
+	box-shadow: 2px 2px black;
 }
 
-.modal .joinButton {
-	background-color: #3370E5;
-	border-color: transparent;
+.container .joinButton {
+	background-color: #FBA465;
 }
 
-.modal .cancelButton {
-	background-color: white;
+.container .cancelButton {
+	background-color: #B2B1AB;
 }
 
 @keyframes fade {
