@@ -15,9 +15,13 @@ export default function NicknameModal(props) {
 	return ReactDOM.createPortal(
 		<div className={styles.window}>
 			<div className={styles.modal}>
-				<h1>Enter a Display Name:</h1>
-				<input value={nickname} placeholder="e.g. George Moore" type="text" onChange={onInputChange}/>
-				<button onClick={() => props.onSubmit(nickname)}>Join Lab</button>
+				<h1>Join Lab</h1>
+				<input value={window.location.href} type="text" readonly/>
+				<input value={nickname} placeholder="Display Name" type="text" onChange={onInputChange}/>
+				<div>
+					<button className={styles.joinButton} onClick={() => props.onSubmit(nickname)}>Join</button>
+					<button className={styles.cancelButton} onClick={() => window.location.href = "http://localhost:5000"}>Cancel</button>
+				</div>
 			</div>
 
 		</div>, document.getElementById("portal")
