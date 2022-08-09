@@ -57,7 +57,6 @@ export default function App() {
 	useEffect(() => {
 
 		const initialise = async () => {
-			const nickname = window.localStorage.getItem("nickname");
 			const roomID = window.location.pathname.replace("/room/", "");
 			const port = await fetchPort(roomID);
 			socket = await connectSocket(port);
@@ -70,12 +69,7 @@ export default function App() {
 			socket.on("disconnect", () => {
 				setError(true);
 			})
-
-			if (nickname != null) {
-				socket.emit("join-room", peer.id, nickname);
-			} else {
-				setNicknameModalOpen(true);
-			}
+			setNicknameModalOpen(true);
 		}
 		initialise();
 

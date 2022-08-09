@@ -53,30 +53,6 @@ html, body {
 	width: 190px;
 }
 
-.container input {
-	background-color: #242424;
-	border-style: solid;
-	border-width: 1px;
-	border-radius: 1000px;
-	border-color: #B2B1AB;
-	width: 100%;
-	outline: none;
-	font-size: 15px;
-	padding: 5px;
-	padding-left: 15px;
-	padding-right: 15px;
-	font-family: "Avenir Light";
-	color: #B2B1AB;
-	box-shadow: 2px 2px black;
-	box-sizing: border-box;
-	margin-bottom: 5px;
-}
-
-.container input::placeholder {
-	color: #B2B1AB;
-	opacity: 0.75;
-}
-
 .container button:hover {
 	transform: scale(1.1);
 }
