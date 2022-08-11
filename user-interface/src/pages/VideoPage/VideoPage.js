@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import AudioIcon from "../../icons/AudioIcon/AudioIcon.js";
 import VideoStream from "../../components/VideoStream/VideoStream.js";
+import { socket } from "../../App.js";
 
 export default function VideoPage(props) {
 
@@ -14,7 +15,8 @@ export default function VideoPage(props) {
 
 	const videos = Object.keys(room.users).map((user, index) => {
 		const peer = room.users[user].peerID;
-		return <VideoStream peer={peer} key={index}/>
+		const paused = room.users[user].isVideoPaused;
+		return <VideoStream peer={peer} key={index} paused={paused}/>
 	})
 
 	return (
@@ -23,7 +25,9 @@ export default function VideoPage(props) {
 		}}>
 			{videos}
 			<div className={styles.footer}>
-				<button>
+				<button onClick={() => {
+					socket.emit("toggle-video");
+				}}>
 					<VideoIcon fill="white"/>
 				</button>
 				<button onClick={() => alert("AUDIO")}>

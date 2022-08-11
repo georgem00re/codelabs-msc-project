@@ -67,6 +67,11 @@ io.on("connection", (socket) => {
 		})
 	})
 
+	socket.on("toggle-video", () => {
+		room.users[user.socketID].isVideoPaused = !room.users[user.socketID].isVideoPaused;
+		io.sockets.emit("update-room", room);
+	})
+
 	socket.on("disconnecting", () => {
 		room.removeUser(user.socketID);
 
@@ -75,6 +80,7 @@ io.on("connection", (socket) => {
 		}
 		io.sockets.emit("update-room", room);
 	})
+
 
 })
 

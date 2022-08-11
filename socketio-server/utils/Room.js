@@ -11,6 +11,7 @@ class Room {
 		this.chat = new Chat();
 		this.textEditor = new TextEditor("Testing!");
 		this.terminal = new Terminal();
+		this.isVideoPaused = false;
 	}
 
 	addUser(user) {

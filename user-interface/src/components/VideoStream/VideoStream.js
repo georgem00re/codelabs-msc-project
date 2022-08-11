@@ -46,13 +46,16 @@ export default function VideoStream(props) {
 
 	},[])
 
+	useEffect(() => {
+		props.paused == true ? video.current.pause() : video.current.play();
+	}, [props.paused])
+
 	return (
 		<div className={styles.container}>
-			<video ref={video}/>
+			<video ref={video} style={{
+				filter: props.paused == true ? "blur(5px)" : "none"
+			}}/>
 			<h2>&#9823;</h2>
-			<h1 style={{
-				backgroundColor: props.peer == peer.id ? "green" : "black"
-			}}>{props.peer}</h1>
 		</div>
 	)
 }
