@@ -7,7 +7,6 @@ import { peer } from "../../App.js";
 export default function VideoStream(props) {
 
 	const video = useRef(null);
-	const [titleVisible, setTitleVisible] = useState(false);
 
 	const getVideoStream = async () => {
 		return navigator.mediaDevices.getUserMedia({ 
@@ -52,10 +51,8 @@ export default function VideoStream(props) {
 	}, [props.paused])
 
 	return (
-		<div className={styles.container} onMouseEnter={() => setTitleVisible(true)} onMouseLeave={() => setTitleVisible(false)}>
-			<h1 style={{
-				opacity: titleVisible == true ? "100%" : "0%"
-			}}>{props.displayName || "Anonymous"}</h1>
+		<div className={styles.container}>
+			<h1>{props.displayName || "Anonymous"}</h1>
 			<video ref={video} style={{
 				filter: props.paused == true ? "blur(5px)" : "none"
 			}}/>
