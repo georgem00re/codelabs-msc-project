@@ -72,6 +72,11 @@ io.on("connection", (socket) => {
 		io.sockets.emit("update-room", room);
 	})
 
+	socket.on("toggle-audio", () => {
+		room.users[user.socketID].isVideoMuted = !room.users[user.socketID].isVideoMuted;
+		io.sockets.emit("update-room", room);
+	})
+
 	socket.on("disconnecting", () => {
 		room.removeUser(user.socketID);
 

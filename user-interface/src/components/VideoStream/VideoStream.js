@@ -53,7 +53,7 @@ export default function VideoStream(props) {
 	return (
 		<div className={styles.container}>
 			<h1>{props.displayName || "Anonymous"}</h1>
-			<video ref={video} style={{
+			<video muted={props.muted} ref={video} style={{
 				filter: props.paused == true ? "blur(5px)" : "none"
 			}}/>
 			<h2>&#9823;</h2>

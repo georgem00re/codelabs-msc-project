@@ -16,8 +16,9 @@ export default function VideoPage(props) {
 	const videos = Object.keys(room.users).map((user, index) => {
 		const peer = room.users[user].peerID;
 		const paused = room.users[user].isVideoPaused;
+		const muted = room.users[user].isVideoMuted;
 		const displayName = room.users[user].displayName;
-		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused}/>
+		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused} muted={muted}/>
 	})
 
 	return (
@@ -26,13 +27,15 @@ export default function VideoPage(props) {
 		}}>
 			{videos}
 			<div className={styles.footer}>
-				<button onClick={() => {
-					socket.emit("toggle-video");
-				}}>
-					<VideoIcon fill="white"/>
+				<button style={{
+					backgroundColor: room.users[socket.id].isVideoPaused == true ? "white" : "#2E2E2E"
+				}} onClick={() => {socket.emit("toggle-video");}}>
+					<VideoIcon fill={room.users[socket.id].isVideoPaused == true ? "#2E2E2E" : "white" }/>
 				</button>
-				<button onClick={() => alert("AUDIO")}>
-					<AudioIcon fill="white"/>
+				<button style={{
+					backgroundColor: room.users[socket.id].isVideoMuted == true ? "white" : "#2E2E2E"
+				}} onClick={() => socket.emit("toggle-audio")}>
+					<AudioIcon fill={room.users[socket.id].isVideoMuted == true ? "#2E2E2E" : "white" }/>
 				</button>
 			</div>
 		</div>
