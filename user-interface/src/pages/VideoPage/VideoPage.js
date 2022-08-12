@@ -16,7 +16,8 @@ export default function VideoPage(props) {
 	const videos = Object.keys(room.users).map((user, index) => {
 		const peer = room.users[user].peerID;
 		const paused = room.users[user].isVideoPaused;
-		return <VideoStream peer={peer} key={index} paused={paused}/>
+		const displayName = room.users[user].displayName;
+		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused}/>
 	})
 
 	return (
