@@ -23,3 +23,10 @@ export function selectCodePage() {
 		type: "SELECT_CODE_PAGE"
 	}
 }
+
+export function updatePrimaryColour(str) {
+	return {
+		type: "UPDATE_PRIMARY_COLOUR",
+		payload: str
+	}
+}

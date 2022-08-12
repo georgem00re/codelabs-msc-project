@@ -13,7 +13,7 @@ import TickIcon from "../../icons/TickIcon/TickIcon.js";
 import InviteIcon from "../../icons/InviteIcon/InviteIcon.js";
 import PersonIcon from "../../icons/PersonIcon/PersonIcon.js";
 import { socket } from "../../App.js";
-import { lightGrey, primaryColour } from "../../colours.js";
+import { lightGrey } from "../../colours.js";
 
 export default function NavigationBar(props) {
 
@@ -36,7 +36,7 @@ export default function NavigationBar(props) {
 export function InviteDropdown(props) {
 
 	const [isVisible, setVisible] = useState(false);
-	const [text, setText] = useState("Copy Link to Clipboard?")
+	const [text, setText] = useState("Copy Link to Clipboard?");
 
 	return (
 		<div onMouseEnter={() => setVisible(true)} onMouseLeave={() => {
@@ -82,64 +82,77 @@ export function DropdownCell(props) {
 }
 
 export function NavigationBarButton(props) {
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<button onClick={props.onClick} className={props.selected == true ? `${styles.button} ${styles.selected}` : styles.button} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
+		<button onClick={props.onClick} className={styles.button} onMouseEnter={props.onMouseEnter} onMouseLeave={props.onMouseLeave}>
 			{props.children}
-			<h1>{props.title}</h1>
+			<h1 style={{ color: props.selected == true ? primaryColour : props.color }}>{props.title}</h1>
 		</button>
 	)
 }
 
 export function ShareButton(props) {
 	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
 
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Share">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Share" color={color}>
 			<InviteIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function CodeButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Code">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Code" color={color}>
 			<CodeIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function ExitButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Exit">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Exit" color={color}>
 			<ExitIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function VideoButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Video">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Video" color={color}>
 			<VideoIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function ChatButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Chat">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Chat" color={color}>
 			<ChatIcon fill={props.selected == true ? primaryColour : color}/>
 		</NavigationBarButton>
 	)
 }
 
 export function UsersButton(props) {
-	const [color, setColor] = useState(lightGrey)
+	const [color, setColor] = useState(lightGrey);
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
-		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Users">
+		<NavigationBarButton selected={props.selected} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor(lightGrey)} onClick={props.onClick} title="Users" color={color}>
 			<GroupIcon fill={props.selected == true ? primaryColour : color}/>
 			<h2 className={styles.number} style={{ color }}>{props.length}</h2>
 		</NavigationBarButton>

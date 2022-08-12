@@ -18,3 +18,11 @@ export function pageReducer(state = "CodePage", action) {
 		return state;
 	}
 }
+
+export function primaryColourReducer(state = "#9BEA9D", action) {
+	if (action.type === "UPDATE_PRIMARY_COLOUR") {
+		return action.payload;
+	} else {
+		return state;
+	}
+}

@@ -47,10 +47,6 @@
 	text-shadow: 1px 1px black;
 }
 
-.selected h1 {
-	color: #FBA465;
-}
-
 .button:hover h1 {
 	color: #FBA465;
 }

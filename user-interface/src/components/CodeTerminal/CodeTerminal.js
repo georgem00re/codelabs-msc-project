@@ -1,7 +1,7 @@
 
 import styles from "./CodeTerminal.module.css";
 import { useState } from "react";
-import { primaryColour } from "../../colours.js";
+import { useSelector } from "react-redux";
 
 export default function CodeTerminal(props) {
 
@@ -43,6 +43,8 @@ function TerminalIcon(props) {
 
 function TerminalButton(props) {
 	const [color, setColor] = useState("#B2B1AB");
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
 		<button className={styles.terminalButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
 			<TerminalIcon fill={color}/>
@@ -52,7 +54,9 @@ function TerminalButton(props) {
 }
 
 function DropdownButton(props) {
-	const [color, setColor] = useState("#B2B1AB")
+	const [color, setColor] = useState("#B2B1AB");
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
 		<select style={{ color: color }} className={styles.dropdown} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onChange={props.onChange} value={props.mode}>
 			{props.children}
@@ -62,6 +66,8 @@ function DropdownButton(props) {
 
 function RunButton(props) {
 	const [color, setColor] = useState("#B2B1AB");
+	const primaryColour = useSelector(state => state.primaryColour);
+
 	return (
 		<button className={styles.runButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
 			<RunIcon fill={color}/>
