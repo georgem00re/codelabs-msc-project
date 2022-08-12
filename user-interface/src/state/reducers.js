@@ -26,3 +26,11 @@ export function primaryColourReducer(state = "#9BEA9D", action) {
 		return state;
 	}
 }
+
+export function secondaryColourReducer(state = "#B2B1AB", action) {
+	if (action.type === "UPDATE_SECONDARY_COLOUR") {
+		return action.payload;
+	} else {
+		return state;
+	}
+}

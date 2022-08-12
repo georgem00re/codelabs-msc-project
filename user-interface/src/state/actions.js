@@ -30,3 +30,10 @@ export function updatePrimaryColour(str) {
 		payload: str
 	}
 }
+
+export function updateSecondaryColour(str) {
+	return {
+		type: "UPDATE_SECONDARY_COLOUR",
+		payload: str
+	}
+}

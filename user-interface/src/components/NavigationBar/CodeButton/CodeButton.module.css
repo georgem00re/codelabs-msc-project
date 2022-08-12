@@ -1,0 +1,31 @@
+
+.button {
+	background-color: transparent;
+	height: 100%;
+	width: 65px;
+	border-style: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.button svg {
+	width: 20px;
+	height: 20px;
+	margin: 0px;
+	fill: grey;
+	filter: drop-shadow(1px 1px black);
+}
+
+.button h1 {
+	color: #B2B1AB;
+	font-family: "Avenir Light";
+	font-size: 12px;
+	padding: 0px;
+	margin: 0px;
+	text-shadow: 1px 1px black;
+}
