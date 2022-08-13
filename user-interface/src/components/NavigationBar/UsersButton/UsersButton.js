@@ -7,9 +7,8 @@ import GroupIcon from "../../../icons/GroupIcon/GroupIcon.js";
 import PersonIcon from "../../../icons/PersonIcon/PersonIcon.js";
 
 export default function UsersButton(props) {
-	const secondaryColour = useSelector(state => state.secondaryColour);
-	const primaryColour = useSelector(state => state.primaryColour);
-	const [color, setColor] = useState(secondaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 	const room = useSelector(state => state.room);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -19,10 +18,10 @@ export default function UsersButton(props) {
 
 	return (
 		<button onClick={props.onClick} className={styles.button} onMouseEnter={() => {
-			setColor(primaryColour);
+			setColor(colors.primaryColor);
 			setDropdownVisible(true);
 		}} onMouseLeave={() => {
-			setColor(secondaryColour);
+			setColor(colors.secondaryColor);
 			setDropdownVisible(false);
 		}}>
 			<GroupIcon fill={color}/>
@@ -36,15 +35,15 @@ export default function UsersButton(props) {
 function DropdownMenu(props) {
 
 	const room = useSelector(state => state.room);
-	const secondaryColour = useSelector(state => state.secondaryColour);
+	const colors = useSelector(state => state.color);
 
 	return (
-		<div className={styles.dropdownMenu} style={{ display: props.visible == true ? "flex" : "none" }}>
+		<div className={styles.dropdownMenu} style={{ display: props.visible == true ? "flex" : "none", backgroundColor: colors.tertiaryColor }}>
 			{Object.keys(room.users).map((element, index) => {
 				return (
 					<div className={styles.dropdownCell} key={index}>
-						<PersonIcon fill={secondaryColour}/>
-						<h3>{room.users[element].displayName || "Anonymous"}</h3>
+						<PersonIcon fill={colors.secondaryColor}/>
+						<h3 style={{ color: colors.secondaryColor }}>{room.users[element].displayName || "Anonymous"}</h3>
 					</div>
 				)
 			})}

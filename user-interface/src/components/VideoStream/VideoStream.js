@@ -7,6 +7,7 @@ import { peer } from "../../App.js";
 export default function VideoStream(props) {
 
 	const video = useRef(null);
+	const color = useSelector(state => state.color)
 
 	const getVideoStream = async () => {
 		return navigator.mediaDevices.getUserMedia({ 
@@ -52,7 +53,7 @@ export default function VideoStream(props) {
 
 	return (
 		<div className={styles.container}>
-			<h1>{props.displayName || "Anonymous"}</h1>
+			<h1 style={{ backgroundColor: color.tertiaryColor, color: color.secondaryColor}}>{props.displayName || "Anonymous"}</h1>
 			<video muted={props.muted} ref={video} style={{
 				filter: props.paused == true ? "blur(5px)" : "none"
 			}}/>

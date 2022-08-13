@@ -1,13 +1,12 @@
 
 import { createStore, combineReducers } from "redux";
-import { roomReducer, pageReducer, primaryColourReducer, secondaryColourReducer } from "./reducers.js";
+import { roomReducer, pageReducer, colorReducer } from "./reducers.js";
 
 
 const allReducers = combineReducers({
 	page: pageReducer,
 	room: roomReducer,
-	primaryColour: primaryColourReducer,
-	secondaryColour: secondaryColourReducer
+	color: colorReducer
 })
 
 const store = createStore(allReducers);

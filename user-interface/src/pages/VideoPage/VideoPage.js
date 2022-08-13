@@ -12,6 +12,7 @@ export default function VideoPage(props) {
 
 	const page = useSelector(state => state.page);
 	const room = useSelector(state => state.room);
+	const color = useSelector(state => state.color);
 
 	const videos = Object.keys(room.users).map((user, index) => {
 		const peer = room.users[user].peerID;
@@ -23,19 +24,20 @@ export default function VideoPage(props) {
 
 	return (
 		<div className={styles.canvas} style={{
-			display: page == "VideoPage" ? "flex" : "none"
+			display: page == "VideoPage" ? "flex" : "none",
+			backgroundColor: color.quaternaryColor
 		}}>
 			{videos}
 			<div className={styles.footer}>
 				<button style={{
-					backgroundColor: room.users[socket.id].isVideoPaused == true ? "white" : "#2E2E2E"
+					backgroundColor: room.users[socket.id].isVideoPaused == true ? color.secondaryColor : color.tertiaryColor
 				}} onClick={() => {socket.emit("toggle-video");}}>
-					<VideoIcon fill={room.users[socket.id].isVideoPaused == true ? "#2E2E2E" : "white" }/>
+					<VideoIcon fill={room.users[socket.id].isVideoPaused == true ? color.tertiaryColor : color.secondaryColor }/>
 				</button>
 				<button style={{
-					backgroundColor: room.users[socket.id].isVideoMuted == true ? "white" : "#2E2E2E"
+					backgroundColor: room.users[socket.id].isVideoMuted == true ? color.secondaryColor : color.tertiaryColor
 				}} onClick={() => socket.emit("toggle-audio")}>
-					<AudioIcon fill={room.users[socket.id].isVideoMuted == true ? "#2E2E2E" : "white" }/>
+					<AudioIcon fill={room.users[socket.id].isVideoMuted == true ? color.tertiaryColor : color.secondaryColor }/>
 				</button>
 			</div>
 		</div>

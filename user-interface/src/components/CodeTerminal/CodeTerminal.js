@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 export default function CodeTerminal(props) {
 
 	const [open, setOpen] = useState(false);
+	const color = useSelector(state => state.color);
 	const options = props.modes.map((value, index) => {
 		return <option key={index} value={value}>{value}</option>
 	})
@@ -14,15 +15,15 @@ export default function CodeTerminal(props) {
 		<div className={styles.container} style={{
 			height: open ? "300px" : "29px"
 		}}>
-			<div className={styles.header}>
+			<div className={styles.header} style={{ backgroundColor: color.tertiaryColor }}>
 				<TerminalButton onClick={() => setOpen(!open)}/>
 				<div className={styles.right}>
 					<RunButton onClick={() => props.onRunClicked()}/>
 					<DropdownButton onChange={(e) => props.onModeChange(e.target.value)}>{options}</DropdownButton>
 				</div>
 			</div>
-			<div className={styles.console}>
-				{ props.isLoading == true ? <LoadingSpinner/> : <textarea disabled value={props.value}/> }
+			<div className={styles.console} style={{ backgroundColor: color.quaternaryColor }}>
+				{ props.isLoading == true ? <LoadingSpinner/> : <textarea disabled value={props.value} style={{ color: color.secondaryColor, backgroundColor: color.quaternaryColor }}/> }
 			</div>
 		</div>
 	)
@@ -42,11 +43,11 @@ function TerminalIcon(props) {
 }
 
 function TerminalButton(props) {
-	const [color, setColor] = useState("#B2B1AB");
-	const primaryColour = useSelector(state => state.primaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 
 	return (
-		<button className={styles.terminalButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
+		<button className={styles.terminalButton} onMouseEnter={() => setColor(colors.primaryColor)} onMouseLeave={() => setColor(colors.secondaryColor)} onClick={props.onClick}>
 			<TerminalIcon fill={color}/>
 			<h1 style={{ color: color }}>Terminal</h1>
 		</button>
@@ -54,22 +55,22 @@ function TerminalButton(props) {
 }
 
 function DropdownButton(props) {
-	const [color, setColor] = useState("#B2B1AB");
-	const primaryColour = useSelector(state => state.primaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 
 	return (
-		<select style={{ color: color }} className={styles.dropdown} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onChange={props.onChange} value={props.mode}>
+		<select style={{ color: color }} className={styles.dropdown} onMouseEnter={() => setColor(colors.primaryColor)} onMouseLeave={() => setColor(colors.secondaryColor)} onChange={props.onChange} value={props.mode}>
 			{props.children}
 		</select>
 	)
 }
 
 function RunButton(props) {
-	const [color, setColor] = useState("#B2B1AB");
-	const primaryColour = useSelector(state => state.primaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 
 	return (
-		<button className={styles.runButton} onMouseEnter={() => setColor(primaryColour)} onMouseLeave={() => setColor("#B2B1AB")} onClick={props.onClick}>
+		<button className={styles.runButton} onMouseEnter={() => setColor(colors.primaryColor)} onMouseLeave={() => setColor(colors.secondaryColor)} onClick={props.onClick}>
 			<RunIcon fill={color}/>
 		</button>
 	)

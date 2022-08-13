@@ -7,21 +7,20 @@ import CodeIcon from "../../../icons/CodeIcon/CodeIcon.js";
 
 
 export default function CodeButton(props) {
-	const primaryColour = useSelector(state => state.primaryColour);
-	const secondaryColour = useSelector(state => state.secondaryColour);
-	const [color, setColor] = useState(secondaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 	const page = useSelector(state => state.page);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		page == "CodePage" ? setColor(primaryColour) : setColor(secondaryColour);
+		page == "CodePage" ? setColor(colors.primaryColor) : setColor(colors.secondaryColor);
 	}, [page])
 
 	return (
 		<button onClick={() => dispatch(selectCodePage())} className={styles.button} onMouseEnter={() => {
-			if (page != "CodePage") { setColor(primaryColour) }
+			if (page != "CodePage") { setColor(colors.primaryColor) }
 		}} onMouseLeave={() => {
-			if (page != "CodePage") { setColor(secondaryColour) }
+			if (page != "CodePage") { setColor(colors.secondaryColor) }
 		}}>
 			<CodeIcon fill={color}/>
 			<h1 style={{ color }}>Code</h1>

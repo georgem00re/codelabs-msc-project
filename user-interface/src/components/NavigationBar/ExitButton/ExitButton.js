@@ -6,15 +6,14 @@ import { selectCodePage } from "../../../state/actions.js";
 import ExitIcon from "../../../icons/ExitIcon/ExitIcon.js";
 
 export default function ExitButton(props) {
-	const primaryColour = useSelector(state => state.primaryColour);
-	const secondaryColour = useSelector(state => state.secondaryColour);
-	const [color, setColor] = useState(secondaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 
 	return (
 		<button onClick={() => window.location = "http://localhost:5000/"} className={styles.button} onMouseEnter={() => {
-			setColor(primaryColour);
+			setColor(colors.primaryColor);
 		}} onMouseLeave={() => {
-			setColor(secondaryColour);
+			setColor(colors.secondaryColor);
 		}}>
 			<ExitIcon fill={color}/>
 			<h1 style={{ color }}>Exit</h1>

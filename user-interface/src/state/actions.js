@@ -24,16 +24,30 @@ export function selectCodePage() {
 	}
 }
 
-export function updatePrimaryColour(str) {
+export function updatePrimaryColor(str) {
 	return {
-		type: "UPDATE_PRIMARY_COLOUR",
+		type: "UPDATE_PRIMARY_COLOR",
 		payload: str
 	}
 }
 
-export function updateSecondaryColour(str) {
+export function updateSecondaryColor(str) {
 	return {
-		type: "UPDATE_SECONDARY_COLOUR",
+		type: "UPDATE_SECONDARY_COLOR",
+		payload: str
+	}
+}
+
+export function updateTertiaryColor(str) {
+	return {
+		type: "UPDATE_TERTIARY_COLOR",
+		payload: str
+	}
+}
+
+export function updateQuaternaryColor(str) {
+	return {
+		type: "UPDATE_QUATERNARY_COLOR",
 		payload: str
 	}
 }

@@ -7,9 +7,8 @@ import CopyIcon from "../../../icons/CopyIcon/CopyIcon.js";
 
 
 export default function ShareButton(props) {
-	const primaryColour = useSelector(state => state.primaryColour);
-	const secondaryColour = useSelector(state => state.secondaryColour);
-	const [color, setColor] = useState(secondaryColour);
+	const colors = useSelector(state => state.color);
+	const [color, setColor] = useState(colors.secondaryColor);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 	const [dropdownText, setDropdownText] = useState("Copy Link to Clipboard?")
 
@@ -18,10 +17,10 @@ export default function ShareButton(props) {
 			navigator.clipboard.writeText(window.location.href);
 			setDropdownText("Copied Link to Clipboard!");
 		}} className={styles.button} onMouseEnter={() => {
-			setColor(primaryColour);
+			setColor(colors.primaryColor);
 			setDropdownVisible(true);
 		}} onMouseLeave={() => {
-			setColor(secondaryColour);
+			setColor(colors.secondaryColor);
 			setDropdownVisible(false);
 			setDropdownText("Copy Link to Clipboard?")
 		}}>
@@ -34,12 +33,12 @@ export default function ShareButton(props) {
 
 function DropdownMenu(props) {
 
-	const secondaryColour = useSelector(state => state.secondaryColour);
+	const colors = useSelector(state => state.color);
 
 	return (
-		<div className={styles.dropdownMenu} style={{ display: props.visible == true ? "flex" : "none" }}>
-			<CopyIcon fill={secondaryColour}/>
-			<h1>{props.text}</h1>
+		<div className={styles.dropdownMenu} style={{ display: props.visible == true ? "flex" : "none", backgroundColor: colors.tertiaryColor }}>
+			<CopyIcon fill={colors.secondaryColor}/>
+			<h1 style={{ color: colors.secondaryColor}}>{props.text}</h1>
 		</div>
 	)
 }

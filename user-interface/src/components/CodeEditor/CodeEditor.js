@@ -5,6 +5,7 @@ import "codemirror/mode/javascript/javascript";
 import "codemirror/mode/python/python";
 import "codemirror/keymap/sublime";
 import "codemirror/theme/material-darker.css";
+import "codemirror/theme/ttcn.css";
 import "codemirror/mode/ruby/ruby";
 import "./CodeMirror.css";
 import { useEffect, useState } from "react";
