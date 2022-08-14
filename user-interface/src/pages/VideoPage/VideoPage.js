@@ -6,7 +6,8 @@ import { useSelector } from "react-redux";
 import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import AudioIcon from "../../icons/AudioIcon/AudioIcon.js";
 import VideoStream from "../../components/VideoStream/VideoStream.js";
-import { socket } from "../../App.js";
+import PauseButton from "../../components/PauseButton/PauseButton.js";
+import MuteButton from "../../components/MuteButton/MuteButton.js";
 
 export default function VideoPage(props) {
 
@@ -29,16 +30,8 @@ export default function VideoPage(props) {
 		}}>
 			{videos}
 			<div className={styles.footer}>
-				<button style={{
-					backgroundColor: room.users[socket.id].isVideoPaused == true ? color.secondaryColor : color.tertiaryColor
-				}} onClick={() => {socket.emit("toggle-video");}}>
-					<VideoIcon fill={room.users[socket.id].isVideoPaused == true ? color.tertiaryColor : color.secondaryColor }/>
-				</button>
-				<button style={{
-					backgroundColor: room.users[socket.id].isVideoMuted == true ? color.secondaryColor : color.tertiaryColor
-				}} onClick={() => socket.emit("toggle-audio")}>
-					<AudioIcon fill={room.users[socket.id].isVideoMuted == true ? color.tertiaryColor : color.secondaryColor }/>
-				</button>
+				<PauseButton/>
+				<MuteButton/>
 			</div>
 		</div>
 	)
