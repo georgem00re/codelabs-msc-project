@@ -7,6 +7,7 @@ import "codemirror/keymap/sublime";
 import "codemirror/theme/material-darker.css";
 import "codemirror/theme/ttcn.css";
 import "codemirror/mode/ruby/ruby";
+import "codemirror/mode/php/php";
 import "./CodeMirror.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
