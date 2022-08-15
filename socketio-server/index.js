@@ -68,12 +68,12 @@ io.on("connection", (socket) => {
 	})
 
 	socket.on("toggle-video", () => {
-		room.users[user.socketID].isVideoPaused = !room.users[user.socketID].isVideoPaused;
+		room.users[user.socketID].toggleVideoPause();
 		io.sockets.emit("update-room", room);
 	})
 
 	socket.on("toggle-audio", () => {
-		room.users[user.socketID].isVideoMuted = !room.users[user.socketID].isVideoMuted;
+		room.users[user.socketID].toggleVideoMute()
 		io.sockets.emit("update-room", room);
 	})
 

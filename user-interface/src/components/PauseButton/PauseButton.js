@@ -9,11 +9,25 @@ export default function PauseButton() {
 	const room = useSelector(state => state.room);
 	const color = useSelector(state => state.color);
 
+	const clickHandler = () => {
+		socket.emit("toggle-video");
+	}
+
+	const getBackgroundColor = () => {
+		if (room.users[socket.id] == undefined) { return color.tertiaryColor};
+		return room.users[socket.id].isVideoPaused ? color.secondaryColor : color.tertiaryColor
+	}
+
+	const getIconColor = () => {
+		if (room.users[socket.id] == undefined) { return color.secondaryColor};
+		return room.users[socket.id].isVideoPaused ? color.tertiaryColor : color.secondaryColor
+	}
+
 	return (
 		<button className={styles.pauseButton} style={{
-			backgroundColor: room.users[socket.id].isVideoPaused == true ? color.secondaryColor : color.tertiaryColor
-		}} onClick={() => {socket.emit("toggle-video");}}>
-			<VideoIcon fill={room.users[socket.id].isVideoPaused == true ? color.tertiaryColor : color.secondaryColor }/>
+			backgroundColor: getBackgroundColor()
+		}} onClick={clickHandler}>
+			<VideoIcon fill={getIconColor()}/>
 		</button>
 	)
 }
