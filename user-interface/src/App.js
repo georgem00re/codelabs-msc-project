@@ -93,7 +93,7 @@ export default function App() {
 			<CodePage/>
 			<VideoPage/>
 			<ChatPage/>
-			<ErrorModal open={error} onDismiss={() => window.location.href = "http://localhost:5000" }/>
+			<ErrorModal open={error}/>
 		</div>
 	)
 }
