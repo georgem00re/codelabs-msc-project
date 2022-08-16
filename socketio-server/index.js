@@ -1,20 +1,26 @@
 
-const { createServer } = require("http");
+const express = require("express");
+const app = express();
+const http = require("http");
 const { Server } = require("socket.io")
-const httpServer = createServer();
+const server = http.createServer(app);
 const PORT = process.env.PORT || 7000;
+const { ExpressPeerServer } = require("peer");
 const { Room } = require("./utils/Room.js");
 const { User } = require("./utils/User.js");
 const { Message } = require("./utils/Message.js");
 const room = new Room();
-const roomID = process.env.ROOM_ID;
 
-const io = new Server(httpServer, {
+const io = new Server(server, {
 	cors: {
 		origin: "*",
 		methods: ["GET", "POST"]
 	}
 });
+
+app.use("/peerjs", ExpressPeerServer(server, {
+	debug: true
+}))
 
 io.on("connection", (socket) => {
 
@@ -89,4 +95,4 @@ io.on("connection", (socket) => {
 
 })
 
-httpServer.listen(PORT);
+server.listen(PORT);

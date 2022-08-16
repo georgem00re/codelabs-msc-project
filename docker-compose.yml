@@ -14,7 +14,6 @@ services:
       - ${PWD}/express-server/package.json:/app/package.json
     depends_on:
       - user-interface
-      - peerjs-server
       - execution-service
       - matchmaker
     network_mode: "bridge"
@@ -29,14 +28,6 @@ services:
       - ${PWD}/user-interface/src:/app/src
       - ${PWD}/user-interface/package.json:/app/package.json
       - ${PWD}/user-interface/public:/app/public
-    network_mode: "bridge"
-
-  peerjs-server:
-    image: "codelabs-peerjs-server"
-    build:
-      context: "./peerjs-server/"
-    ports:
-      - "9000:9000"
     network_mode: "bridge"
 
   socketio-server:

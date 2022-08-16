@@ -42,9 +42,9 @@ export default function App() {
 		})
 	}
 
-	const connectPeer = () => {
+	const connectPeer = (port) => {
 		return new Promise((resolve, reject) => {
-			const peer = new Peer(undefined, { host: "localhost", port: 9000, path: "/peerjs" })
+			const peer = new Peer(undefined, { host: "localhost", port: port, path: "/peerjs" })
 			peer.on("open", () => {
 				resolve(peer);
 			})
@@ -60,7 +60,7 @@ export default function App() {
 			const roomID = window.location.pathname.replace("/room/", "");
 			const port = await fetchPort(roomID);
 			socket = await connectSocket(port);
-			peer = await connectPeer();
+			peer = await connectPeer(port);
 
 			socket.on("update-room", (room) => {
 				dispatch(updateRoom(room));
