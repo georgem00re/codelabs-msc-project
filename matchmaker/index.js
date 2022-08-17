@@ -11,12 +11,13 @@ const docker = new Docker({
 })
 
 async function spawnContainer(roomID) {
-	const options = { Image: "codelabs-socketio-server", name: roomID ,HostConfig: { PortBindings: { "7000/tcp": [{ HostPort: "0" }] }}, ExposedPorts: { "7000/tcp": {} } }
+	const options = { Image: "codelabs-socketio-server", name: roomID ,HostConfig: { PortBindings: { "7000/tcp": [{ HostPort: "0" }] }, NetworkMode: "bridge" }, ExposedPorts: { "7000/tcp": {} } }
 	const container = await docker.createContainer(options);
 	const containerID = container.id;
 	await container.start();
-	const containers = await docker.listContainers({ all: false });
-	return containers.find((element) => { return element.Id == containerID; }).Ports[0].PublicPort;
+	const inspect = await container.inspect();
+	const port = inspect.NetworkSettings.Ports["7000/tcp"][0].HostPort;
+	return port;
 }
 
 app.use(bodyParser.json());
