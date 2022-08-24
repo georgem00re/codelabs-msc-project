@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./VideoStream.module.css";
 import { peer } from "../../App.js";
+import PersonIcon from "../../icons/PersonIcon/PersonIcon.js";
 
 export default function VideoStream(props) {
 
@@ -53,11 +54,11 @@ export default function VideoStream(props) {
 
 	return (
 		<div className={styles.container}>
-			<h1 style={{ backgroundColor: color.tertiaryColor, color: color.secondaryColor}}>{props.displayName || "Anonymous"}</h1>
+			<h1 style={{ backgroundColor: color.quaternaryColor, color: color.secondaryColor}}>{props.displayName || "Anonymous"}</h1>
 			<video muted={props.muted} ref={video} style={{
 				filter: props.paused == true ? "blur(5px)" : "none"
 			}}/>
-			<h2>&#9823;</h2>
+			<PersonIcon fill={"white"}/>
 		</div>
 	)
 }
