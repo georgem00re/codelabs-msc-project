@@ -17,6 +17,8 @@ services:
       - execution-service
       - matchmaker
     network_mode: "bridge"
+    environment:
+      IP_ADDRESS: ${IP_ADDRESS:-localhost}
 
   user-interface:
     image: "codelabs-user-interface"
@@ -29,6 +31,8 @@ services:
       - ${PWD}/user-interface/package.json:/app/package.json
       - ${PWD}/user-interface/public:/app/public
     network_mode: "bridge"
+    environment:
+      REACT_APP_HOST_IP_ADDRESS: ${IP_ADDRESS:-localhost}
 
   socketio-server:
     image: "codelabs-socketio-server"

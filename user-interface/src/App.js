@@ -23,16 +23,17 @@ export default function App() {
 	const [error, setError] = useState(false);
 	const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
 	const dispatch = useDispatch();
+	const ipaddr = process.env.REACT_APP_HOST_IP_ADDRESS || "localhost"
 
 	const fetchPort = async (roomID) => {
-		const res = await fetch("http://localhost:10000", { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
+		const res = await fetch(`http://${ipaddr}:10000`, { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
 		const data = await res.json();
 		return data.port;
 	}
 
 	const connectSocket = (port) => {
 		return new Promise((resolve, reject) => {
-			const socket = io.connect(`http://localhost:${port}`, { reconnection: true });
+			const socket = io.connect(`http://${ipaddr}:${port}`, { reconnection: true });
 			socket.on("connect", () => {
 				resolve(socket);
 			})
@@ -44,7 +45,7 @@ export default function App() {
 
 	const connectPeer = (port) => {
 		return new Promise((resolve, reject) => {
-			const peer = new Peer(undefined, { host: "localhost", port: port, path: "/peerjs" })
+			const peer = new Peer(undefined, { host: ipaddr, port: port, path: "/peerjs" })
 			peer.on("open", () => {
 				resolve(peer);
 			})
