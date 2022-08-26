@@ -15,7 +15,7 @@ services:
     depends_on:
       - user-interface
       - execution-service
-      - matchmaker
+      - matchmaking-service
     network_mode: "bridge"
     environment:
       IP_ADDRESS: ${IP_ADDRESS:-localhost}
@@ -58,15 +58,15 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "bridge"
 
-  matchmaker:
-    image: "codelabs-matchmaker"
+  matchmaking-service:
+    image: "codelabs-matchmaking-service"
     build:
-      context: "./matchmaker/"
+      context: "./matchmaking-service/"
     ports:
       - "10000:10000"
     volumes:
-      - ${PWD}/matchmaker/index.js:/app/index.js
-      - ${PWD}/matchmaker/package.json:/app/package.json
+      - ${PWD}/matchmaking-service/index.js:/app/index.js
+      - ${PWD}/matchmaking-service/package.json:/app/package.json
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "bridge"
 
