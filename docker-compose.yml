@@ -2,16 +2,16 @@ version: "3"
 
 services:
 
-  express-server:
-    image: "codelabs-express-server"
+  application-server:
+    image: "codelabs-application-server"
     build: 
-      context: "./express-server/"
+      context: "./application-server/"
     ports:
       - "5000:5000"
     volumes:
-      - ${PWD}/express-server/public:/app/public
-      - ${PWD}/express-server/index.js:/app/index.js
-      - ${PWD}/express-server/package.json:/app/package.json
+      - ${PWD}/application-server/public:/app/public
+      - ${PWD}/application-server/index.js:/app/index.js
+      - ${PWD}/application-server/package.json:/app/package.json
     depends_on:
       - user-interface
       - code-execution-api
