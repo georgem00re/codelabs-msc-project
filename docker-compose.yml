@@ -14,7 +14,7 @@ services:
       - ${PWD}/express-server/package.json:/app/package.json
     depends_on:
       - user-interface
-      - execution-service
+      - code-execution-api
       - matchmaking-service
     network_mode: "bridge"
     environment:
@@ -46,15 +46,15 @@ services:
       - ${PWD}/socketio-server/package.json:/app/package.json
     network_mode: "bridge"
 
-  execution-service:
-    image: "codelabs-execution-service"
+  code-execution-api:
+    image: "codelabs-code-execution-api"
     build:
-      context: "./execution-service/"
+      context: "./code-execution-api/"
     ports:
       - "4000:4000"
     volumes:
-      - ${PWD}/execution-service/index.js:/app/index.js
-      - ${PWD}/execution-service/package.json:/app/package.json
+      - ${PWD}/code-execution-api/index.js:/app/index.js
+      - ${PWD}/code-execution-api/package.json:/app/package.json
       - /var/run/docker.sock:/var/run/docker.sock
     network_mode: "bridge"
 
