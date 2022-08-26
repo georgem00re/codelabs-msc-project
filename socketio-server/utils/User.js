@@ -1,30 +1,15 @@
 
+const { Media } = require("./Media.js");
+
 class User {
-	constructor(socketID) {
-		this.socketID = socketID
-		this.isVideoPaused = false;
-		this.isVideoMuted = false;
-	}
 
-	setDisplayName(value) {
-		this.displayName = value;
-	}
-
-	toggleVideoMute() {
-		this.isVideoMuted = !this.isVideoMuted;
-	}
-
-	toggleVideoPause() {
-		this.isVideoPaused = !this.isVideoPaused;
-	}
-
-	setPeerID(peerID) {
+	constructor(socketID, peerID, displayName) {
+		this.socketID = socketID;
 		this.peerID = peerID;
+		this.displayName = displayName;
+		this.media = new Media();
 	}
-
-	getRooms(io) {
-		return io.sockets.adapter.sids[this.socketID]
-	}
+	
 }
 
 module.exports = { User }; 

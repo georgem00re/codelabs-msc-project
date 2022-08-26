@@ -12,14 +12,14 @@ import MuteButton from "../../components/MuteButton/MuteButton.js";
 export default function VideoPage(props) {
 
 	const page = useSelector(state => state.page);
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const color = useSelector(state => state.color);
 
-	const videos = Object.keys(room.users).map((user, index) => {
-		const peer = room.users[user].peerID;
-		const paused = room.users[user].isVideoPaused;
-		const muted = room.users[user].isVideoMuted;
-		const displayName = room.users[user].displayName;
+	const videos = Object.keys(lab.users).map((user, index) => {
+		const peer = lab.users[user].peerID;
+		const paused = lab.users[user].isVideoPaused;
+		const muted = lab.users[user].isVideoMuted;
+		const displayName = lab.users[user].displayName;
 		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused} muted={muted}/>
 	})
 

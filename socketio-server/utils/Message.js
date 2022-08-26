@@ -1,11 +1,17 @@
 
 class Message {
-	constructor(body, author, name) {
+
+	constructor(body, displayName, authorID) {
 		this.body = body;
-		this.author = author;
-		this.name = name;
-		this.timestamp = Date.now();
+		this.displayName = displayName;
+		this.authorID = authorID;
+		this.timestamp = this.generateTimestamp();
 	}
+
+	generateTimestamp() {
+		return Date.now();
+	}
+	
 }
 
 module.exports = { Message };

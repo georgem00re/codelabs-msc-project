@@ -6,7 +6,7 @@ import styles from "./MuteButton.module.css";
 
 export default function MuteButton() {
 
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const color = useSelector(state => state.color);
 
 	const clickHandler = () => {
@@ -14,13 +14,13 @@ export default function MuteButton() {
 	}
 
 	const getBackgroundColor = () => {
-		if (room.users[socket.id] == undefined) { return color.tertiaryColor};
-		return room.users[socket.id].isVideoMuted ? color.secondaryColor : color.tertiaryColor
+		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
+		return lab.users[socket.id].isVideoMuted ? color.secondaryColor : color.tertiaryColor
 	}
 
 	const getIconColor = () => {
-		if (room.users[socket.id] == undefined) { return color.secondaryColor};
-		return room.users[socket.id].isVideoMuted ? color.tertiaryColor : color.secondaryColor
+		if (lab.users[socket.id] == undefined) { return color.secondaryColor};
+		return lab.users[socket.id].isVideoMuted ? color.tertiaryColor : color.secondaryColor
 	}
 
 	return (

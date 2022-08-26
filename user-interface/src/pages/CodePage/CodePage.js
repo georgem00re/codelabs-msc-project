@@ -9,7 +9,7 @@ import CodeEditor from "../../components/CodeEditor/CodeEditor.js";
 export default function CodePage(props) {
 
 	const page = useSelector(state => state.page);
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const [cursor, setCursor] = useState([1,1]);
 
 	return (
@@ -17,7 +17,7 @@ export default function CodePage(props) {
 			display: page == "CodePage" ? "flex" : "none"
 		}}>
 			<CodeEditor onCursorChange={(line, column) => setCursor([line, column])}/>
-			<CodeTerminal value={room.terminal.output} isLoading={room.terminal.isLoading} onRunClicked={() => socket.emit("run-code")} onModeChange={(val) => socket.emit("mode-changed", val)} modes={room.textEditor.modes} cursorLine={cursor[0]} cursorColumn={cursor[1]}/>
+			<CodeTerminal value={lab.codeTerminal.value} isLoading={lab.codeTerminal.isLoading} onRunClicked={() => socket.emit("run-code")} onModeChange={(val) => socket.emit("mode-changed", val)} modes={lab.codeTerminal.modes} cursorLine={cursor[0]} cursorColumn={cursor[1]}/>
 		</div>
 
 	)

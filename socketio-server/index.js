@@ -6,10 +6,11 @@ const { Server } = require("socket.io")
 const server = http.createServer(app);
 const PORT = process.env.PORT || 7000;
 const { ExpressPeerServer } = require("peer");
-const { Room } = require("./utils/Room.js");
+const { Lab } = require("./utils/Lab.js");
 const { User } = require("./utils/User.js");
 const { Message } = require("./utils/Message.js");
-const room = new Room();
+
+const lab = new Lab();
 
 const io = new Server(server, {
 	cors: {
@@ -24,72 +25,69 @@ app.use("/peerjs", ExpressPeerServer(server, {
 
 io.on("connection", (socket) => {
 
-	const user = new User(socket.id);
-
-	socket.on("join-room", (peerID, nickname) => {
-		user.setPeerID(peerID);
-		user.setDisplayName( nickname == null ? "Anonymous" : nickname )
-		room.addUser(user);
-		io.sockets.emit("update-room", room);
+	socket.on("join-lab", (peerID, displayName) => {
+		const user = new User(socket.id, peerID, displayName == null ? "Anonymous" : displayName);
+		lab.addUser(user);
+		io.sockets.emit("update-lab", lab);
 	})
 
-	socket.on("send-message", (msg) => {
-		const message = new Message(msg, socket.id, user.displayName);
-		room.chat.addMessage(message);
-		io.sockets.emit("update-room", room);
-	})
-
-	socket.on("mode-changed", (mode) => {
-		room.textEditor.mode = mode;
-		io.sockets.emit("update-room", room);
+	socket.on("send-message", (messageBody) => {
+		const message = new Message(messageBody, lab.users[socket.id].displayName, socket.id);
+		lab.chat.sendMessage(message);
+		io.sockets.emit("update-lab", lab);
 	})
 
 	socket.on("code-changed", (value) => {
-		room.textEditor.value = value;
-		io.sockets.emit("update-room", room);
+		lab.codeEditor.setValue(value);
+		io.sockets.emit("update-lab", lab);
+	})
+
+	socket.on("mode-changed", (mode) => {
+		lab.codeTerminal.setMode(mode);
+		lab.codeEditor.setMode(mode);
+		io.sockets.emit("update-lab", lab);
 	})
 
 	socket.on("run-code", () => {
 
-		room.terminal.isLoading = true;
-		io.sockets.emit("update-room", room);
+		lab.codeTerminal.isLoading = true;
+		io.sockets.emit("update-lab", lab);
 
-		fetch(`http://172.17.0.1:4000/${room.textEditor.mode}`, { 
+		fetch(`http://172.17.0.1:4000/${lab.codeTerminal.mode}`, { 
 			method: "POST", 
 			headers: { "Content-Type": "application/json" }, 
-			body: JSON.stringify({ code: room.textEditor.value }),
+			body: JSON.stringify({ code: lab.codeEditor.value }),
 			keepalive: true
 		}).then((res) => {
 			return res.json();
 		}).then((data) => {
-			room.terminal.isLoading = false;
-			room.terminal.output = data.output;
-			io.sockets.emit("update-room", room);
+			lab.codeTerminal.isLoading = false;
+			lab.codeTerminal.value = data.output;
+			io.sockets.emit("update-lab", lab);
 		}).catch((err) => {
-			console.log(err);
-			room.terminal.isLoading = false;
-			room.terminal.output = err.message;
-			io.sockets.emit("update-room", room);
+			lab.codeTerminal.isLoading = false;
+			lab.codeTerminal.value = err.message;
+			io.sockets.emit("update-lab", lab);
 		})
 	})
 
-	socket.on("toggle-video", () => {
-		room.users[user.socketID].toggleVideoPause();
-		io.sockets.emit("update-room", room);
+	socket.on("toggle-video", () => { // done
+		lab.users[socket.id].media.toggleVideoPause();
+		io.sockets.emit("update-lab", lab);
 	})
 
-	socket.on("toggle-audio", () => {
-		room.users[user.socketID].toggleVideoMute()
-		io.sockets.emit("update-room", room);
+	socket.on("toggle-audio", () => { // done
+		lab.users[socket.id].media.toggleAudioMute()
+		io.sockets.emit("update-lab", lab);
 	})
 
-	socket.on("disconnecting", () => {
-		room.removeUser(user.socketID);
+	socket.on("disconnecting", () => { // done
+		lab.removeUser(socket.id);
 
-		if (Object.keys(room.users).length == 0) {
+		if (Object.keys(lab.users).length == 0) {
 			process.exit();
 		}
-		io.sockets.emit("update-room", room);
+		io.sockets.emit("update-lab", lab);
 	})
 
 

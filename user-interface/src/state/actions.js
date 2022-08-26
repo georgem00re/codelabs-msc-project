@@ -1,8 +1,8 @@
 
-export function updateRoom(room) {
+export function updateLab(lab) {
 	return {
-		type: "UPDATE_ROOM",
-		payload: room
+		type: "UPDATE_LAB",
+		payload: lab
 	}
 }
 

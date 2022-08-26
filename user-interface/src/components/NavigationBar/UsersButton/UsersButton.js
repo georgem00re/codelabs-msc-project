@@ -9,11 +9,11 @@ import PersonIcon from "../../../icons/PersonIcon/PersonIcon.js";
 export default function UsersButton(props) {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
 
 	const getLength = () => {
-		return Object.keys(room.users).length;
+		return Object.keys(lab.users).length;
 	}
 
 	return (
@@ -34,16 +34,16 @@ export default function UsersButton(props) {
 
 function DropdownMenu(props) {
 
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const colors = useSelector(state => state.color);
 
 	return (
 		<div className={styles.dropdownMenu} style={{ display: props.visible == true ? "flex" : "none", backgroundColor: colors.tertiaryColor }}>
-			{Object.keys(room.users).map((element, index) => {
+			{Object.keys(lab.users).map((element, index) => {
 				return (
 					<div className={styles.dropdownCell} key={index}>
 						<PersonIcon fill={colors.secondaryColor}/>
-						<h3 style={{ color: colors.secondaryColor }}>{room.users[element].displayName || "Anonymous"}</h3>
+						<h3 style={{ color: colors.secondaryColor }}>{lab.users[element].displayName || "Anonymous"}</h3>
 					</div>
 				)
 			})}

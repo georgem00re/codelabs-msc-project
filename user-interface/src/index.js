@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
-      <Route exact path="/room/:room" element={<Provider store={store}><App/></Provider>}/>
+      <Route exact path="/lab/:lab" element={<Provider store={store}><App/></Provider>}/>
     </Routes>
   </BrowserRouter>
 );

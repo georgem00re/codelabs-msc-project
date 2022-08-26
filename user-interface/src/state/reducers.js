@@ -1,6 +1,6 @@
 
-export function roomReducer(state = null, action) {
-	if (action.type === "UPDATE_ROOM") {
+export function labReducer(state = null, action) {
+	if (action.type === "UPDATE_LAB") {
 		return action.payload
 	} else {
 		return state;

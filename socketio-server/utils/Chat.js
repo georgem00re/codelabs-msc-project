@@ -1,10 +1,14 @@
 
+const { Message } = require("./Message.js");
+
 class Chat {
+
 	constructor() {
 		this.messages = [];
 	}
-	addMessage(msg) {
-		this.messages.push(msg);
+
+	sendMessage(message) {
+		this.messages.push(message);
 	}
 }
 

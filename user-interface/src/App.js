@@ -1,6 +1,6 @@
 
 import { useEffect, useState } from "react";
-import { updateRoom  } from "./state/actions.js";
+import { updateLab  } from "./state/actions.js";
 import { useSelector, useDispatch } from "react-redux";
 import LoadingModal from "./components/LoadingModal/LoadingModal.js";
 import NavigationBar  from "./components/NavigationBar/NavigationBar.js";
@@ -18,15 +18,15 @@ export let socket;
 
 export default function App() {
 
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const page = useSelector(state => state.page);
 	const [error, setError] = useState(false);
 	const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
 	const dispatch = useDispatch();
 	const ipaddr = process.env.REACT_APP_HOST_IP_ADDRESS || "localhost"
 
-	const fetchPort = async (roomID) => {
-		const res = await fetch(`http://${ipaddr}:10000`, { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ roomID }) });
+	const fetchPort = async (labID) => {
+		const res = await fetch(`http://${ipaddr}:10000`, { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ labID }) });
 		const data = await res.json();
 		return data.port;
 	}
@@ -58,13 +58,13 @@ export default function App() {
 	useEffect(() => {
 
 		const initialise = async () => {
-			const roomID = window.location.pathname.replace("/room/", "");
-			const port = await fetchPort(roomID);
+			const labID = window.location.pathname.replace("/lab/", "");
+			const port = await fetchPort(labID);
 			socket = await connectSocket(port);
 			peer = await connectPeer(port);
 
-			socket.on("update-room", (room) => {
-				dispatch(updateRoom(room));
+			socket.on("update-lab", (lab) => {
+				dispatch(updateLab(lab));
 			})
 
 			socket.on("disconnect", () => {
@@ -76,12 +76,12 @@ export default function App() {
 
 	},[])
 
-	if (room == null) { 
+	if (lab == null) { 
 		return (
 			<React.Fragment>
 				<LoadingModal/>
 				<NicknameModal open={nicknameModalOpen} onSubmit={(nickname) => {
-					socket.emit("join-room", peer.id, nickname);
+					socket.emit("join-lab", peer.id, nickname);
 					setNicknameModalOpen(false);
 				}}/>
 			</React.Fragment>

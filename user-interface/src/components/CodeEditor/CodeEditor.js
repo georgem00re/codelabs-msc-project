@@ -15,7 +15,7 @@ import { socket } from "../../App.js";
 
 export default function CodeEditor(props) {
 
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const page = useSelector(state => state.page);
 
 	useEffect(() => {
@@ -23,9 +23,9 @@ export default function CodeEditor(props) {
 			lineNumbers: true,
 			theme: "material-darker",
 			keyMap: "sublime",
-			mode: room.textEditor.mode
+			mode: lab.codeEditor.mode
 		})
-		editor.setValue(room != null ? room.textEditor.value : "");
+		editor.setValue(lab != null ? lab.codeEditor.value : "");
 
 		editor.on("change", (instance, changes) => {
 			const { origin } = changes;
@@ -41,10 +41,10 @@ export default function CodeEditor(props) {
 			props.onCursorChange(line, column);
 		})
 
-		socket.on("update-room", (rm) => {
+		socket.on("update-lab", (lab) => {
 			const cursor = editor.getCursor();
-			editor.setValue(rm.textEditor.value);
-			editor.setOption("mode", rm.textEditor.mode);
+			editor.setValue(lab.codeEditor.value);
+			editor.setOption("mode", lab.codeEditor.mode);
 			editor.setCursor(cursor);
 		})
 	},[])

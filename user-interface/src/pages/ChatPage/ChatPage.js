@@ -7,13 +7,12 @@ import MessageInput from "../../components/MessageInput/MessageInput.js";
 
 export default function ChatPage() {
 
-	const room = useSelector(state => state.room);
+	const lab = useSelector(state => state.lab);
 	const page = useSelector(state => state.page);
 	const color = useSelector(state => state.color);
 
-	const messages = room.chat.messages.map((msg, index) => {
-		const displayName = msg.name;
-		return <MessageBubble key={index} author={msg.author} displayName={displayName} timestamp={msg.timestamp} message={msg.body}/>
+	const messages = lab.chat.messages.map((msg, index) => {
+		return <MessageBubble key={index} author={msg.authorID} displayName={msg.displayName} timestamp={msg.timestamp} message={msg.body}/>
 	});
 
 
