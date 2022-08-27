@@ -1,5 +1,5 @@
 
-const { Lab } = require("../utils/Lab.js");
+const { Lab } = require("../models/Lab.js");
 
 const lab = new Lab();
 

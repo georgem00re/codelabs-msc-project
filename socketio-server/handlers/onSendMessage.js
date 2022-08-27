@@ -1,6 +1,6 @@
 
 const { lab } = require("../state/lab.js");
-const { Message } = require("../utils/Message.js");
+const { Message } = require("../models/Message.js");
 
 module.exports = function onSendMessage(io, socket) {
 	socket.on("send-message", (messageBody) => {

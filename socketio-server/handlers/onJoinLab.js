@@ -1,5 +1,5 @@
 
-const { User } = require("../utils/User.js");
+const { User } = require("../models/User.js");
 const { lab } = require("../state/lab.js");
 
 module.exports = function onJoinLab(io, socket) {
