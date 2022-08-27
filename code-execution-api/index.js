@@ -16,3 +16,5 @@ app.post("/ruby", rubyController);
 app.listen(PORT, () => {
 	console.log(`Listening on PORT ${4000}`);
 });
+
+module.exports = { app };
