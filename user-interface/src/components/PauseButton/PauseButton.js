@@ -15,12 +15,12 @@ export default function PauseButton() {
 
 	const getBackgroundColor = () => {
 		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
-		return lab.users[socket.id].isVideoPaused ? color.secondaryColor : color.tertiaryColor
+		return lab.users[socket.id].media.isVideoPaused ? color.secondaryColor : color.tertiaryColor
 	}
 
 	const getIconColor = () => {
 		if (lab.users[socket.id] == undefined) { return color.secondaryColor};
-		return lab.users[socket.id].isVideoPaused ? color.tertiaryColor : color.secondaryColor
+		return lab.users[socket.id].media.isVideoPaused ? color.tertiaryColor : color.secondaryColor
 	}
 
 	return (

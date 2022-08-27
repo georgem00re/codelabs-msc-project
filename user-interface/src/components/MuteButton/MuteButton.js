@@ -15,12 +15,12 @@ export default function MuteButton() {
 
 	const getBackgroundColor = () => {
 		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
-		return lab.users[socket.id].isVideoMuted ? color.secondaryColor : color.tertiaryColor
+		return lab.users[socket.id].media.isAudioMuted ? color.secondaryColor : color.tertiaryColor
 	}
 
 	const getIconColor = () => {
 		if (lab.users[socket.id] == undefined) { return color.secondaryColor};
-		return lab.users[socket.id].isVideoMuted ? color.tertiaryColor : color.secondaryColor
+		return lab.users[socket.id].media.isAudioMuted ? color.tertiaryColor : color.secondaryColor
 	}
 
 	return (

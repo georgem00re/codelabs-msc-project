@@ -17,8 +17,8 @@ export default function VideoPage(props) {
 
 	const videos = Object.keys(lab.users).map((user, index) => {
 		const peer = lab.users[user].peerID;
-		const paused = lab.users[user].isVideoPaused;
-		const muted = lab.users[user].isVideoMuted;
+		const paused = lab.users[user].media.isVideoPaused;
+		const muted = lab.users[user].media.isAudioMuted;
 		const displayName = lab.users[user].displayName;
 		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused} muted={muted}/>
 	})
