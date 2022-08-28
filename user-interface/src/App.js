@@ -20,10 +20,11 @@ export default function App() {
 
 	const lab = useSelector(state => state.lab);
 	const page = useSelector(state => state.page);
+	const color = useSelector(state => state.color);
 	const [error, setError] = useState(false);
 	const [nicknameModalOpen, setNicknameModalOpen] = useState(false);
 	const dispatch = useDispatch();
-	const ipaddr = process.env.REACT_APP_HOST_IP_ADDRESS || "localhost"
+	const ipaddr = process.env.REACT_APP_HOST_IP_ADDRESS || "localhost";
 
 	const fetchPort = async (labID) => {
 		const res = await fetch(`http://${ipaddr}:10000`, { method: "POST", headers: { "Content-Type": "application/json"}, body: JSON.stringify({ labID }) });
@@ -79,7 +80,7 @@ export default function App() {
 	if (lab == null) { 
 		return (
 			<React.Fragment>
-				<LoadingModal/>
+				<LoadingModal fontColor={color.secondaryColor} backgroundColor={color.quaternaryColor}/>
 				<NicknameModal open={nicknameModalOpen} onSubmit={(nickname) => {
 					socket.emit("join-lab", peer.id, nickname);
 					setNicknameModalOpen(false);
