@@ -81,7 +81,7 @@ export default function App() {
 		return (
 			<React.Fragment>
 				<LoadingModal fontColor={color.secondaryColor} backgroundColor={color.quaternaryColor}/>
-				<NicknameModal open={nicknameModalOpen} onSubmit={(nickname) => {
+				<NicknameModal open={nicknameModalOpen} fontColor={color.secondaryColor} backgroundColor={color.tertiaryColor} textInputColor={color.quaternaryColor} primaryColor={color.primaryColor} onSubmit={(nickname) => {
 					socket.emit("join-lab", peer.id, nickname);
 					setNicknameModalOpen(false);
 				}}/>
