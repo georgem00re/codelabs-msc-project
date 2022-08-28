@@ -8,6 +8,7 @@ import AudioIcon from "../../icons/AudioIcon/AudioIcon.js";
 import VideoStream from "../../components/VideoStream/VideoStream.js";
 import PauseButton from "../../components/PauseButton/PauseButton.js";
 import MuteButton from "../../components/MuteButton/MuteButton.js";
+import { socket } from "../../App.js";
 
 export default function VideoPage(props) {
 
@@ -23,6 +24,20 @@ export default function VideoPage(props) {
 		return <VideoStream displayName={displayName} peer={peer} key={index} paused={paused} muted={muted}/>
 	})
 
+	const onPauseClicked = () => {
+		socket.emit("toggle-video");
+	}
+
+	const getPauseButtonBackgroundColor = () => {
+		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
+		return lab.users[socket.id].media.isVideoPaused ? color.secondaryColor : color.tertiaryColor
+	}
+
+	const getPauseButtonIconColor = () => {
+		if (lab.users[socket.id] == undefined) { return color.secondaryColor};
+		return lab.users[socket.id].media.isVideoPaused ? color.tertiaryColor : color.secondaryColor
+	}
+
 	return (
 		<div className={styles.canvas} style={{
 			display: page == "VideoPage" ? "flex" : "none",
@@ -30,7 +45,7 @@ export default function VideoPage(props) {
 		}}>
 			{videos}
 			<div className={styles.footer}>
-				<PauseButton/>
+				<PauseButton onClick={() => onPauseClicked()} backgroundColor={getPauseButtonBackgroundColor()} iconColor={getPauseButtonIconColor()}/>
 				<MuteButton/>
 			</div>
 		</div>
