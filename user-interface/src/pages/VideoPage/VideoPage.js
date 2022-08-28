@@ -28,6 +28,10 @@ export default function VideoPage(props) {
 		socket.emit("toggle-video");
 	}
 
+	const onMuteClicked = () => {
+		socket.emit("toggle-audio");
+	}
+
 	const getPauseButtonBackgroundColor = () => {
 		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
 		return lab.users[socket.id].media.isVideoPaused ? color.secondaryColor : color.tertiaryColor
@@ -38,6 +42,16 @@ export default function VideoPage(props) {
 		return lab.users[socket.id].media.isVideoPaused ? color.tertiaryColor : color.secondaryColor
 	}
 
+	const getMuteButtonBackgroundColor = () => {
+		if (lab.users[socket.id] == undefined) { return color.tertiaryColor};
+		return lab.users[socket.id].media.isAudioMuted ? color.secondaryColor : color.tertiaryColor
+	}
+
+	const getMuteButtonIconColor = () => {
+		if (lab.users[socket.id] == undefined) { return color.secondaryColor};
+		return lab.users[socket.id].media.isAudioMuted ? color.tertiaryColor : color.secondaryColor
+	}
+
 	return (
 		<div className={styles.canvas} style={{
 			display: page == "VideoPage" ? "flex" : "none",
@@ -46,7 +60,7 @@ export default function VideoPage(props) {
 			{videos}
 			<div className={styles.footer}>
 				<PauseButton onClick={() => onPauseClicked()} backgroundColor={getPauseButtonBackgroundColor()} iconColor={getPauseButtonIconColor()}/>
-				<MuteButton/>
+				<MuteButton onClick={() => onMuteClicked()} backgroundColor={getMuteButtonBackgroundColor()} iconColor={getMuteButtonIconColor()}/>
 			</div>
 		</div>
 	)
