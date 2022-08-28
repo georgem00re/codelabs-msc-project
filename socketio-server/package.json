@@ -16,5 +16,7 @@
     "peer": "^0.6.1",
     "socket.io": "^4.5.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "jest": "^29.0.1"
+  }
 }
