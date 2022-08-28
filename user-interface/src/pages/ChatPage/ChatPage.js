@@ -4,6 +4,7 @@ import styles from "./ChatPage.module.css";
 import { useSelector } from "react-redux";
 import MessageBubble from "../../components/MessageBubble/MessageBubble.js";
 import MessageInput from "../../components/MessageInput/MessageInput.js";
+import { socket } from "../../App.js";
 
 export default function ChatPage() {
 
@@ -12,7 +13,7 @@ export default function ChatPage() {
 	const color = useSelector(state => state.color);
 
 	const messages = lab.chat.messages.map((msg, index) => {
-		return <MessageBubble key={index} author={msg.authorID} displayName={msg.displayName} timestamp={msg.timestamp} message={msg.body}/>
+		return <MessageBubble key={index} author={msg.authorID} displayName={msg.displayName} timestamp={msg.timestamp} message={msg.body} backgroundColor={color.tertiaryColor} fontColor={color.secondaryColor} socketID={socket.id}/>
 	});
 
 
