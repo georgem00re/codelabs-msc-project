@@ -95,7 +95,7 @@ export default function App() {
 			<CodePage/>
 			<VideoPage/>
 			<ChatPage/>
-			<ErrorModal open={error}/>
+			<ErrorModal open={error} primaryColor={color.primaryColor} secondaryColor={color.secondaryColor} tertiaryColor={color.tertiaryColor} quaternaryColor={color.quaternaryColor}/>
 		</div>
 	)
 }
