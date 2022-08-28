@@ -16,11 +16,14 @@ export default function ChatPage() {
 		return <MessageBubble key={index} author={msg.authorID} displayName={msg.displayName} timestamp={msg.timestamp} message={msg.body} backgroundColor={color.tertiaryColor} fontColor={color.secondaryColor} socketID={socket.id}/>
 	});
 
+	const sendMessage = (msg) => {
+		socket.emit("send-message", msg);
+	}
 
 	return (
 		<div className={styles.canvas} style={{display: page == "ChatPage" ? "flex" : "none" }}>
 			<div className={styles.container} style={{ backgroundColor: color.quaternaryColor }}>{messages}</div>
-			<MessageInput/>
+			<MessageInput onSendClicked={(msg) => sendMessage(msg)} backgroundColor={color.tertiaryColor} iconFill={color.secondaryColor} textInputColor={color.quaternaryColor}/>
 		</div>
 	)
 }
