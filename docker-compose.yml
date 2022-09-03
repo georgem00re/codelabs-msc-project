@@ -13,23 +13,23 @@ services:
       - ${PWD}/application-server/index.js:/app/index.js
       - ${PWD}/application-server/package.json:/app/package.json
     depends_on:
-      - user-interface
+      - react-dev-server
       - code-execution-api
       - matchmaking-service
     network_mode: "bridge"
     environment:
       IP_ADDRESS: ${IP_ADDRESS:-localhost}
 
-  user-interface:
-    image: "codelabs-user-interface"
+  react-dev-server:
+    image: "codelabs-react-dev-server"
     build:
-      context: "./user-interface/"
+      context: "./react-dev-server/"
     ports:
       - "3000:3000"
     volumes:
-      - ${PWD}/user-interface/src:/app/src
-      - ${PWD}/user-interface/package.json:/app/package.json
-      - ${PWD}/user-interface/public:/app/public
+      - ${PWD}/react-dev-server/src:/app/src
+      - ${PWD}/react-dev-server/package.json:/app/package.json
+      - ${PWD}/react-dev-server/public:/app/public
     network_mode: "bridge"
     environment:
       REACT_APP_HOST_IP_ADDRESS: ${IP_ADDRESS:-localhost}
