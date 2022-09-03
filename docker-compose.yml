@@ -34,16 +34,16 @@ services:
     environment:
       REACT_APP_HOST_IP_ADDRESS: ${IP_ADDRESS:-localhost}
 
-  socketio-server:
-    image: "codelabs-socketio-server"
+  lab-server:
+    image: "codelabs-lab-server"
     build:
-      context: "./socketio-server/"
+      context: "./lab-server/"
     ports:
       - "0:7000"
     volumes:
-      - ${PWD}/socketio-server/utils:/app/utils
-      - ${PWD}/socketio-server/index.js:/app/index.js
-      - ${PWD}/socketio-server/package.json:/app/package.json
+      - ${PWD}/lab-server/utils:/app/utils
+      - ${PWD}/lab-server/index.js:/app/index.js
+      - ${PWD}/lab-server/package.json:/app/package.json
     network_mode: "bridge"
 
   code-execution-api:
