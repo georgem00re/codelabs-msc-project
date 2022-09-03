@@ -19,7 +19,7 @@ html, body {
 }
 
 .canvas h1 {
-	color: #FBA465;
+	color: #B2CAFB;
 	font-family: "Avenir Black";
 	font-size: 60px;
 	margin: 30px;
@@ -68,7 +68,7 @@ html, body {
 
 .footer a {
 	text-decoration: none;
-	color: #FBA465;
+	color: #B2CAFB;
 	cursor: pointer;
 }
 
