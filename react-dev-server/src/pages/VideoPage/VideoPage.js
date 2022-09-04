@@ -3,7 +3,6 @@ import React from "react";
 import styles from "./VideoPage.module.css";
 import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import VideoIcon from "../../icons/VideoIcon/VideoIcon.js";
 import VideoStream from "../../components/VideoStream/VideoStream.js";
 import PauseButton from "../../components/PauseButton/PauseButton.js";
 import MuteButton from "../../components/MuteButton/MuteButton.js";
