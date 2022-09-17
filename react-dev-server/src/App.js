@@ -91,7 +91,7 @@ export default function App() {
 
 	return (
 		<div style={{ position: "absolute", height: "100%", width: "100%", backgroundColor: "white"}}>
-			<NavigationBar/>
+			<NavigationBar backgroundColor={color.tertiaryColor}/>
 			<CodePage/>
 			<VideoPage/>
 			<ChatPage/>

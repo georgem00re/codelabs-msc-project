@@ -10,10 +10,8 @@ import { useSelector } from "react-redux";
 
 export default function NavigationBar(props) {
 
-	const color = useSelector(state => state.color);
-
 	return (
-		<nav className={styles.navbar} style={{ backgroundColor: color.tertiaryColor }}>
+		<nav className={styles.navbar} style={{ backgroundColor: props.backgroundColor }}>
 			<CodeButton/>
 			<ChatButton/>
 			<VideoButton/>
