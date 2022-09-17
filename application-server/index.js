@@ -7,7 +7,6 @@ const { rootController } = require("./controllers/rootController.js")
 const { labController } = require("./controllers/labController.js")
 
 app.use(cors());
-app.use(express.static("public"));
 
 app.get("/", rootController);
 app.get("/create-lab", createLabController);
