@@ -1,11 +1,14 @@
 
 import MuteButton from "../components/MuteButton/MuteButton.js";
-import { render, screen } from '@testing-library/react'
+import ShallowRenderer from 'react-test-renderer/shallow';
 
 describe("MuteButton", () => {
 
-	test("render MuteButton component", () => {
-		render(<MuteButton/>);
+	test("shallow render MuteButton component", () => {
+		const renderer = new ShallowRenderer();
+		renderer.render(<MuteButton/>);
+		const res = renderer.getRenderOutput();
+		expect(res.type).toBe("button");
 	})
 
 })

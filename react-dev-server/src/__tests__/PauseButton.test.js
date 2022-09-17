@@ -1,11 +1,14 @@
 
 import PauseButton from "../components/PauseButton/PauseButton.js";
-import { render, screen } from '@testing-library/react'
+import ShallowRenderer from 'react-test-renderer/shallow';
 
 describe("PauseButton", () => {
 
-	test("render PauseButton component", () => {
-		render(<PauseButton/>);
+	test("shallow render PauseButton component", () => {
+		const renderer = new ShallowRenderer();
+		renderer.render(<PauseButton/>);
+		const res = renderer.getRenderOutput();
+		expect(res.type).toBe("button");
 	})
 
 })

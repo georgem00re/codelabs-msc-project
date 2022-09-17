@@ -1,11 +1,14 @@
 
 import MessageInput from "../components/MessageInput/MessageInput.js";
-import { render, screen } from '@testing-library/react'
+import ShallowRenderer from 'react-test-renderer/shallow';
 
 describe("MessageInput", () => {
 
-	test("render MessageInput component", () => {
-		render(<MessageInput/>);
+	test("shallow render MessageInput component", () => {
+		const renderer = new ShallowRenderer();
+		renderer.render(<MessageInput/>);
+		const res = renderer.getRenderOutput();
+		expect(res.type).toBe("div");
 	})
 
 })
