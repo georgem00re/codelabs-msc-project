@@ -3,6 +3,7 @@ import styles from "./UsersButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCodePage } from "../../../state/actions.js";
+import PropTypes from "prop-types";
 
 export default function UsersButton(props) {
 	const colors = useSelector(state => state.color);
@@ -30,6 +31,11 @@ export default function UsersButton(props) {
 	)
 }
 
+UsersButton.propTypes = {
+	onClick: PropTypes.func
+}
+
+
 function DropdownMenu(props) {
 
 	const lab = useSelector(state => state.lab);
@@ -47,6 +53,10 @@ function DropdownMenu(props) {
 			})}
 		</div>
 	)
+}
+
+DropdownMenu.propTypes = {
+	visible: PropTypes.bool
 }
 
 function GroupIcon(props) {
@@ -67,6 +77,10 @@ function GroupIcon(props) {
 	)
 }
 
+GroupIcon.propTypes = {
+	fill: PropTypes.string
+}
+
 function PersonIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -76,4 +90,8 @@ function PersonIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+PersonIcon.propTypes = {
+	fill: PropTypes.string
 }

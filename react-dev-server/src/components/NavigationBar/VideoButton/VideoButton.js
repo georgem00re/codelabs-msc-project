@@ -3,6 +3,7 @@ import styles from "./VideoButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectVideoPage } from "../../../state/actions.js";
+import PropTypes from "prop-types";
 
 export default function VideoButton(props) {
 	const colors = useSelector(state => state.color);
@@ -26,6 +27,10 @@ export default function VideoButton(props) {
 	)
 }
 
+VideoButton.propTypes = {
+	selected: PropTypes.string
+}
+
 function VideoIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -35,4 +40,8 @@ function VideoIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+VideoIcon.propTypes = {
+	fill: PropTypes.string
 }

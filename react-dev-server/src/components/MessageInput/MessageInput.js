@@ -1,6 +1,7 @@
 
 import styles from "./MessageInput.module.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function MessageInput(props) {
 
@@ -22,4 +23,11 @@ export default function MessageInput(props) {
 			</button>
 		</div>
 	)
+}
+
+MessageInput.propTypes = {
+	backgroundColor: PropTypes.string,
+	onSendClicked: PropTypes.func,
+	iconFill: PropTypes.string,
+	textInputColor: PropTypes.string
 }

@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./VideoStream.module.css";
 import { peer } from "../../App.js";
+import PropTypes from "prop-types";
 
 export default function VideoStream(props) {
 
@@ -62,6 +63,13 @@ export default function VideoStream(props) {
 	)
 }
 
+VideoStream.propTypes = {
+	peer: PropTypes.string,
+	paused: PropTypes.bool,
+	muted: PropTypes.bool,
+	displayName: PropTypes.string
+}
+
 function PersonIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -71,4 +79,8 @@ function PersonIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+PersonIcon.propTypes = {
+	fill: PropTypes.string
 }

@@ -3,8 +3,9 @@ import styles from "./ExitButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCodePage } from "../../../state/actions.js";
+import PropTypes from "prop-types";
 
-export default function ExitButton(props) {
+export default function ExitButton() {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
 
@@ -29,4 +30,8 @@ function ExitIcon(props) {
 			</g>
 		</svg>
 	)
+}
+
+ExitIcon.propTypes = {
+	fill: PropTypes.string
 }

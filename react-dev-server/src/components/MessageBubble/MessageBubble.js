@@ -1,5 +1,6 @@
 
 import styles from "./MessageBubble.module.css";
+import PropTypes from "prop-types";
 
 export default function MessageBubble(props) {
 
@@ -14,4 +15,12 @@ export default function MessageBubble(props) {
 			</div>
 		</div>
 	)
+}
+
+MessageBubble.propTypes = {
+	author: PropTypes.string,
+	socketID: PropTypes.string,
+	fontColor: PropTypes.string,
+	message: PropTypes.string,
+	timestamp: PropTypes.string
 }

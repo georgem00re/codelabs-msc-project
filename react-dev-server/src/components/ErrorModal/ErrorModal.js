@@ -1,6 +1,7 @@
 
 import ReactDOM from "react-dom";
 import styles from "./ErrorModal.module.css";
+import PropTypes from "prop-types";
 
 export default function ErrorModal(props) {
 
@@ -23,4 +24,11 @@ export default function ErrorModal(props) {
 			</div>
 		</div>,
 		document.getElementById("portal"))
+}
+
+ErrorModal.propTypes = {
+	open: PropTypes.bool,
+	primaryColor: PropTypes.string,
+	secondaryColor: PropTypes.string,
+	tertiaryColor: PropTypes.string
 }

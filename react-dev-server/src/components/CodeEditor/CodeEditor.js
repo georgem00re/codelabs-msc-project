@@ -12,6 +12,7 @@ import "./CodeMirror.css";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { socket } from "../../App.js";
+import PropTypes from "prop-types";
 
 export default function CodeEditor(props) {
 
@@ -50,4 +51,8 @@ export default function CodeEditor(props) {
 	},[])
 
 	return <textarea id="codemirror"/>
+}
+
+CodeEditor.propTypes = {
+	onCursorChange: PropTypes.func
 }

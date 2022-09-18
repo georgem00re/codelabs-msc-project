@@ -2,6 +2,7 @@
 import styles from "./CodeTerminal.module.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 export default function CodeTerminal(props) {
 
@@ -29,6 +30,14 @@ export default function CodeTerminal(props) {
 	)
 }
 
+CodeTerminal.propTypes = {
+	isLoading: PropTypes.bool,
+	value: PropTypes.string,
+	onRunClicked: PropTypes.func,
+	onModeChange: PropTypes.func,
+	modes: PropTypes.array
+}
+
 function TerminalIcon(props) {
 	return (
 		<svg width="15px" height="12px" viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -40,6 +49,10 @@ function TerminalIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+TerminalIcon.propTypes = {
+	fill: PropTypes.string
 }
 
 function TerminalButton(props) {
@@ -54,6 +67,10 @@ function TerminalButton(props) {
 	)
 }
 
+TerminalButton.propTypes = {
+	onClick: PropTypes.func
+}
+
 function DropdownButton(props) {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
@@ -65,6 +82,11 @@ function DropdownButton(props) {
 	)
 }
 
+DropdownButton.propTypes = {
+	onChange: PropTypes.func,
+	mode: PropTypes.string
+}
+
 function RunButton(props) {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
@@ -74,6 +96,10 @@ function RunButton(props) {
 			<RunIcon fill={color}/>
 		</button>
 	)
+}
+
+RunButton.propTypes = {
+	onClick: PropTypes.func
 }
 
 function RunIcon(props) {
@@ -88,8 +114,14 @@ function RunIcon(props) {
 	)
 }
 
-function LoadingSpinner(props) {
+RunIcon.propTypes = {
+	fill: PropTypes.string
+}
+
+function LoadingSpinner() {
 	return (
 		<div className={styles.loadingSpinner}></div>
 	)
 }
+
+

@@ -1,5 +1,6 @@
 
 import styles from "./PauseButton.module.css";
+import PropTypes from "prop-types";
 
 export default function PauseButton(props) {
 	return (
@@ -7,6 +8,13 @@ export default function PauseButton(props) {
 			<VideoIcon fill={props.iconColor}/>
 		</button>
 	)
+}
+
+PauseButton.propTypes = {
+	fill: PropTypes.string,
+	backgroundColor: PropTypes.string,
+	onClick: PropTypes.func,
+	iconColor: PropTypes.string
 }
 
 function VideoIcon(props) {
@@ -18,4 +26,8 @@ function VideoIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+VideoIcon.propTypes = {
+	fill: PropTypes.string
 }

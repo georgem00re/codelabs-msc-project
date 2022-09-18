@@ -3,6 +3,7 @@ import styles from "./ChatButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectChatPage } from "../../../state/actions.js";
+import PropTypes from "prop-types";
 
 export default function ChatButton(props) {
 	const colors = useSelector(state => state.color);
@@ -27,6 +28,10 @@ export default function ChatButton(props) {
 	)
 }
 
+ChatButton.propTypes = {
+	selected: PropTypes.bool
+}
+
 function ChatIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -36,4 +41,8 @@ function ChatIcon(props) {
     		</g>
 		</svg>
 	)
+}
+
+ChatIcon.propTypes = {
+	fill: PropTypes.string
 }

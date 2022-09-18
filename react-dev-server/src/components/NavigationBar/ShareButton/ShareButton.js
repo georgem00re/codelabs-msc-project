@@ -2,8 +2,9 @@
 import styles from "./ShareButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
-export default function ShareButton(props) {
+export default function ShareButton() {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
 	const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -40,6 +41,11 @@ function DropdownMenu(props) {
 	)
 }
 
+DropdownMenu.propTypes = {
+	visible: PropTypes.bool,
+	text: PropTypes.string
+}
+
 function CopyIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -49,6 +55,10 @@ function CopyIcon(props) {
 	    	</g>
 		</svg>
 	)
+}
+
+CopyIcon.propTypes = {
+	fill: PropTypes.string
 }
 
 function InviteIcon(props) {
@@ -64,4 +74,8 @@ function InviteIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+InviteIcon.propTypes = {
+	fill: PropTypes.string
 }

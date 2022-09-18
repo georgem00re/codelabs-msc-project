@@ -3,8 +3,9 @@ import styles from "./CodeButton.module.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCodePage } from "../../../state/actions.js";
+import PropTypes from "prop-types";
 
-export default function CodeButton(props) {
+export default function CodeButton() {
 	const colors = useSelector(state => state.color);
 	const [color, setColor] = useState(colors.secondaryColor);
 	const page = useSelector(state => state.page);
@@ -26,6 +27,7 @@ export default function CodeButton(props) {
 	)
 }
 
+
 function CodeIcon(props) {
 	return (
 		<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -37,4 +39,8 @@ function CodeIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+CodeIcon.propTypes = {
+	fill: PropTypes.string
 }

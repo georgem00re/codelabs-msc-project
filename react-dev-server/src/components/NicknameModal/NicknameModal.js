@@ -2,6 +2,7 @@
 import ReactDOM from "react-dom";
 import styles from "./NicknameModal.module.css";
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 export default function NicknameModal(props) {
 
@@ -27,4 +28,13 @@ export default function NicknameModal(props) {
 
 		</div>, document.getElementById("portal")
 	)
+}
+
+NicknameModal.propTypes = {
+	open: PropTypes.bool,
+	backgroundColor: PropTypes.string,
+	fontColor: PropTypes.string,
+	primaryColor: PropTypes.string,
+	textInputColor: PropTypes.string,
+	onSubmit: PropTypes.func
 }

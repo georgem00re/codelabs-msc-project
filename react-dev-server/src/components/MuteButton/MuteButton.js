@@ -1,5 +1,6 @@
 
 import styles from "./MuteButton.module.css";
+import PropTypes from "prop-types";
 
 export default function MuteButton(props) {
 
@@ -8,6 +9,12 @@ export default function MuteButton(props) {
 			<AudioIcon fill={props.iconColor}/>
 		</button>
 	)
+}
+
+MuteButton.propTypes = {
+	iconColor: PropTypes.string,
+	backgroundColor: PropTypes.string,
+	onClick: PropTypes.func
 }
 
 function AudioIcon(props) {
@@ -22,4 +29,8 @@ function AudioIcon(props) {
 		    </g>
 		</svg>
 	)
+}
+
+AudioIcon.propTypes = {
+	fill: PropTypes.string
 }

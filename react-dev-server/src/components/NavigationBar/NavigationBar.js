@@ -7,6 +7,7 @@ import UsersButton from "./UsersButton/UsersButton.js";
 import ShareButton from "./ShareButton/ShareButton.js";
 import ExitButton from "./ExitButton/ExitButton.js";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 export default function NavigationBar(props) {
 
@@ -20,4 +21,8 @@ export default function NavigationBar(props) {
 			<ExitButton/>
 		</nav>
 	)
+}
+
+NavigationBar.propTypes = {
+	backgroundColor: PropTypes.string
 }
