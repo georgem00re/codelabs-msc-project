@@ -4,7 +4,7 @@
 Clone the CodeLabs Git repository:
 
 ```bash
-  git clone xxxxxxxx
+  git clone https://git-teaching.cs.bham.ac.uk/mod-msc-proj-2021/grm198
 ```
 
 Install the application's dependencies:
@@ -13,6 +13,18 @@ Install the application's dependencies:
   cd codelabs
   docker compose build
 ```
+
+Install the following Docker images:
+
+```bash
+  docker pull node:latest
+  docker pull python:latest
+  docker pull ruby:latest
+```
+
+## Usage
+
+
 Run the application using Docker:
 
 ```bash
