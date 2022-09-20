@@ -47,5 +47,24 @@ describe("GET /create-lab", () => {
 
 describe("GET /lab/:lab", () => {
 
+	test("status code", async () => {
+		const res = await request(app).get("/lab/123");
+		expect(res.statusCode).toEqual(302);
+	})
+
+	test("content-type", async () => {
+		const res = await request(app).get("/lab/123");
+		expect(res.headers["content-type"]).toEqual("text/plain; charset=utf-8");
+	})
+
+	test("access-control-allow-origin", async () => {
+		const res = await request(app).get("/lab/123");
+		expect(res.headers["access-control-allow-origin"]).toEqual("*");
+	})
+
+	test("location", async () => {
+		const res = await request(app).get("/lab/123");
+		expect(res.headers["location"]).toContain("http://localhost:3000/lab/123")
+	})
 
 })
