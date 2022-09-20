@@ -10,7 +10,7 @@ Clone the CodeLabs Git repository:
 Install the application's dependencies:
 
 ```bash
-  cd codelabs
+  cd grm198
   docker compose build
 ```
 
